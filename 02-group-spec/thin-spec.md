@@ -62,15 +62,15 @@ Nếu user hỏi dùng Paracetamol khi đang sốt/đau đầu nhưng không nó
 AI có thể trả lời tự tin rằng có thể dùng thuốc,
 hậu quả là user tự dùng thuốc sai, quá liều hoặc bỏ qua tình trạng cần khám.
 Prototype sẽ xử lý bằng safety gate bắt buộc: kiểm tra red flags + câu hỏi thiếu thông tin + hiển thị nguồn thuốc + không cá nhân hóa liều khi thiếu dữ kiện + fallback hỏi bác sĩ/dược sĩ.
-Owner kiểm thử path này là Thành viên 4 (Test / failure path).
+Owner kiểm thử path này là Thành viên 4 (T.D.Mạnh) (Test / failure path).
 ```
 
 ## 8. Owner plan cho sáng Day 06
 
 | Thành viên | Việc phụ trách | Bằng chứng cần có trong repo |
 |---|---|---|
-| Thành viên 1 | Research / evidence | Evidence pack, link nguồn CDC/MedlinePlus/WHO, 3 prompt self-use và ghi chú observation. |
-| Thành viên 2 | SPEC | Thin SPEC cuối, sơ đồ flow, 4 paths, checklist safety. |
-| Thành viên 3 | Prototype | Demo chatbot: NER + planner + vector mock/search + medicine CSV/SQL + context fusion + LLM response. |
-| Thành viên 4 | Test / failure path | Test cases happy, low-confidence, red flag, correction; log input/output. |
-| Thành viên 5 | Demo script / repo | Script demo 3-5 phút, README chạy prototype, ảnh/screenshot minh họa. |
+| L.V.Khiêm | Research / evidence | Evidence pack, link nguồn CDC/MedlinePlus/WHO,Openscience, 3 prompt self-use và ghi chú observation. |
+| P.K.Khang | Thin SPEC cuối, sơ đồ flow, 4 paths, checklist safety. |
+| N.D.Hưng | Prototype | Demo chatbot: NER + planner + vector mock/search + medicine CSV/SQL + context fusion + LLM response. |
+| T.D.Mạnh | Test / failure path | Test cases happy, low-confidence, red flag, correction; log input/output. |
+| N.D.M.Trí | Demo script / repo | Script demo 3-5 phút, README chạy prototype, ảnh/screenshot minh họa. |
