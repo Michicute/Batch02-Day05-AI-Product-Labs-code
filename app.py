@@ -518,9 +518,10 @@ def inject_styles() -> None:
         }
 
         div[data-testid="stPopover"] {
-          bottom: 1.35rem;
+          bottom: 1.15rem;
           position: fixed;
-          right: 1.35rem;
+          right: 1.15rem;
+          width: 44px !important;
           z-index: 1000;
         }
 
@@ -532,18 +533,19 @@ def inject_styles() -> None:
           box-shadow: 0 16px 34px rgba(8, 117, 209, 0.3);
           color: #ffffff !important;
           display: flex;
-          gap: 0.35rem;
           font-weight: 900;
-          height: 54px;
+          height: 44px;
           justify-content: center;
-          min-height: 54px;
-          padding: 0 0.95rem !important;
-          width: auto;
+          min-height: 44px;
+          padding: 0 !important;
+          width: 44px !important;
         }
 
         div[data-testid="stPopover"] > button p {
           color: #ffffff !important;
+          font-size: 0 !important;
           font-weight: 900;
+          width: 0 !important;
         }
 
         .mock-row {
@@ -1440,18 +1442,20 @@ def render_chat_autoscroll() -> None:
         <script>
         const scrollChatToBottom = () => {
           const doc = window.parent.document;
-          const messages = doc.querySelectorAll('[data-testid="stChatMessage"]');
-          const target = messages.length
-            ? messages[messages.length - 1]
-            : doc.querySelector('input[aria-label="Câu hỏi"]');
+          const input = doc.querySelector('input[aria-label="Câu hỏi"]');
+          const target = input?.closest('[data-testid="stVerticalBlock"]')
+            || input
+            || Array.from(doc.querySelectorAll('[data-testid="stChatMessage"]')).pop();
           if (target) {
             target.scrollIntoView({ behavior: "smooth", block: "end" });
           }
 
-          const popoverPanels = doc.querySelectorAll('[data-testid="stPopover"] + div, [role="dialog"]');
-          popoverPanels.forEach((panel) => {
-            if (panel && panel.scrollHeight > panel.clientHeight) {
-              panel.scrollTop = panel.scrollHeight;
+          const scrollables = [
+            ...doc.querySelectorAll('[data-testid="stPopover"] + div, [role="dialog"], div[style*="overflow"]')
+          ];
+          scrollables.forEach((node) => {
+            if (node && node.scrollHeight > node.clientHeight) {
+              node.scrollTop = node.scrollHeight;
             }
           });
         };
@@ -1591,7 +1595,7 @@ def render_chat(agent: RagAgent, top_k: int) -> None:
 
 def render_chat_launcher(agent: RagAgent, top_k: int) -> None:
     with st.popover(
-        "Tư vấn",
+        "",
         help="Mở trợ lý y tế",
         icon=":material/support_agent:",
     ):
