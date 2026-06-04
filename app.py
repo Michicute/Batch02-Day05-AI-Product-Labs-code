@@ -579,6 +579,58 @@ def is_nearby_care_request(text: str) -> bool:
     )
 
 
+def is_emergency_care_help_request(
+    text: str,
+    messages: list[dict[str, object]],
+) -> bool:
+    q = text.lower().strip()
+    help_markers = [
+        "không biết số",
+        "không có số",
+        "số điện thoại",
+        "bạn có thể tìm",
+        "bạn giúp",
+        "giúp tôi",
+        "tìm giúp",
+        "liên hệ",
+        "gọi ai",
+        "call",
+        "phone",
+        "contact",
+        "help me",
+    ]
+    emergency_markers = [
+        "uống nhầm",
+        "nhầm thuốc",
+        "thuốc tẩy",
+        "ngộ độc",
+        "khẩn cấp",
+        "cấp cứu",
+        "poison",
+        "poisoning",
+        "emergency",
+    ]
+    recent_text = " ".join(
+        str(message.get("content", "")).lower()
+        for message in messages[-6:]
+    )
+    asks_for_help = any(marker in q for marker in help_markers)
+    emergency_context = any(marker in recent_text for marker in emergency_markers)
+    return asks_for_help and emergency_context
+
+
+def redirect_to_nearby_care(message: str) -> None:
+    st.session_state.messages.append(
+        {
+            "role": "assistant",
+            "content": message,
+            "sources": [],
+        }
+    )
+    st.session_state.active_view = "Cơ sở gần tôi"
+    st.rerun()
+
+
 def render_chat_history() -> None:
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
@@ -611,17 +663,21 @@ def render_chat(agent: RagAgent, top_k: int) -> None:
         st.write(question)
 
     if is_nearby_care_request(question):
-        assistant_message = {
-            "role": "assistant",
-            "content": (
+        redirect_to_nearby_care(
+            (
                 "Mình đã chuyển bạn sang phần gợi ý cơ sở y tế gần nhất. "
                 "Hãy bấm nút định vị và cho phép trình duyệt truy cập vị trí."
-            ),
-            "sources": [],
-        }
-        st.session_state.messages.append(assistant_message)
-        st.session_state.active_view = "Cơ sở gần tôi"
-        st.rerun()
+            )
+        )
+
+    if is_emergency_care_help_request(question, st.session_state.messages[:-1]):
+        redirect_to_nearby_care(
+            (
+                "Mình sẽ giúp bạn tìm cơ sở y tế gần nhất. Nếu đây là tình huống "
+                "khẩn cấp, hãy gọi cấp cứu địa phương ngay. Bạn hãy bấm nút định vị "
+                "ở phần vừa mở để xem bệnh viện/phòng khám gần bạn."
+            )
+        )
 
     loading_slot = st.empty()
     render_loading(loading_slot, "Đang tìm nguồn phù hợp và tạo câu trả lời...")
