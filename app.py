@@ -7,6 +7,7 @@ from urllib.request import Request, urlopen
 
 import pandas as pd
 import streamlit as st
+from streamlit_geolocation import streamlit_geolocation
 
 from src.rag_agent import RagAgent
 
@@ -664,14 +665,15 @@ def render_nearby_results(
 
 def render_nearby_care() -> None:
     st.subheader("Gợi ý nhà thuốc và bệnh viện gần nhất")
-    should_search_current_location = st.button(
-        "Dùng vị trí hiện tại",
-        type="primary",
-        use_container_width=True,
+    location = streamlit_geolocation()
+    has_browser_location = (
+        isinstance(location, dict)
+        and location.get("latitude") is not None
+        and location.get("longitude") is not None
     )
-    location_method = "ip" if should_search_current_location else None
-    browser_lat = None
-    browser_lon = None
+    location_method = "browser" if has_browser_location else None
+    browser_lat = float(location["latitude"]) if has_browser_location else None
+    browser_lon = float(location["longitude"]) if has_browser_location else None
 
     col_a, col_b = st.columns([1, 1])
     with col_a:
@@ -683,14 +685,10 @@ def render_nearby_care() -> None:
     with col_b:
         radius_km = st.slider("Bán kính tìm kiếm", min_value=1, max_value=15, value=5)
 
-    if location_method == "browser":
-        st.success("Đang dùng vị trí hiện tại từ trình duyệt.")
-    elif location_method == "browser_cached":
-        st.success("Đang dùng vị trí trình duyệt đã lưu gần đây.")
-    elif location_method == "ip":
-        st.info("Đang dùng vị trí gần đúng theo IP để trả kết quả nhanh.")
-
-    if not should_search_current_location:
+    if has_browser_location:
+        st.success("Đã lấy được vị trí hiện tại từ trình duyệt.")
+    else:
+        st.caption("Bấm nút định vị ở trên và cho phép trình duyệt truy cập vị trí.")
         return
 
     loading_slot = st.empty()

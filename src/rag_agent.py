@@ -225,9 +225,13 @@ class RagAgent:
             "injection",
             "capsule",
             "composition",
+            "thành phần",
+            "hoạt chất",
             "manufacturer",
+            "nhà sản xuất",
             "side effect",
             "side effects",
+            "tác dụng phụ",
             "review",
             "used for",
         ]
@@ -267,6 +271,8 @@ class RagAgent:
         in_scope_markers = [
             "bệnh",
             "thuốc",
+            "thành phần",
+            "hoạt chất",
             "triệu chứng",
             "điều trị",
             "tác dụng phụ",
@@ -289,8 +295,18 @@ class RagAgent:
             "nhà thuốc",
             "bệnh viện",
             "phòng khám",
+            "paracetamol",
+            "acetaminophen",
+            "ibuprofen",
+            "aspirin",
+            "amoxicillin",
+            "augmentin",
+            "cetirizine",
+            "loratadine",
             "medicine",
             "drug",
+            "composition",
+            "active ingredient",
             "disease",
             "symptom",
             "treatment",
@@ -439,13 +455,15 @@ class RagAgent:
                 {
                     "role": "system",
                     "content": (
-                        "You are a cautious medical Q&A assistant answering medical questions only. Prefer the retrieved "
+                        "You are a cautious medical Q&A assistant answering medical questions only."
+                        "Always answer in the user's language."
+                        "Prefer the retrieved "
                         "context when it is available, and cite retrieved sources with "
                         "bracket numbers like [1]. If no relevant context is available, "
                         "answer using general medical knowledge, say that no local source "
                         "was found, and do not invent citations. Do not diagnose. "
                         "Encourage professional medical advice for urgent, risky, or "
-                        "personal treatment decisions. Always answer in the user's language."
+                        "personal treatment decisions."
                     ),
                 },
                 {
