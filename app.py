@@ -553,6 +553,32 @@ def render_sources(sources: list[dict[str, object]]) -> None:
             st.json(source["metadata"])
 
 
+def is_nearby_care_request(text: str) -> bool:
+    q = text.lower().strip()
+    care_markers = [
+        "cơ sở y tế",
+        "nhà thuốc",
+        "bệnh viện",
+        "phòng khám",
+        "hiệu thuốc",
+        "hospital",
+        "pharmacy",
+        "clinic",
+    ]
+    nearby_markers = [
+        "gần",
+        "quanh đây",
+        "gần đây",
+        "gần tôi",
+        "near",
+        "nearby",
+        "around me",
+    ]
+    return any(marker in q for marker in care_markers) and any(
+        marker in q for marker in nearby_markers
+    )
+
+
 def render_chat_history() -> None:
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
@@ -583,6 +609,19 @@ def render_chat(agent: RagAgent, top_k: int) -> None:
     st.session_state.messages.append({"role": "user", "content": question})
     with st.chat_message("user"):
         st.write(question)
+
+    if is_nearby_care_request(question):
+        assistant_message = {
+            "role": "assistant",
+            "content": (
+                "Mình đã chuyển bạn sang phần gợi ý cơ sở y tế gần nhất. "
+                "Hãy bấm nút định vị và cho phép trình duyệt truy cập vị trí."
+            ),
+            "sources": [],
+        }
+        st.session_state.messages.append(assistant_message)
+        st.session_state.active_view = "Cơ sở gần tôi"
+        st.rerun()
 
     loading_slot = st.empty()
     render_loading(loading_slot, "Đang tìm nguồn phù hợp và tạo câu trả lời...")
@@ -721,14 +760,24 @@ def main() -> None:
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
+    if "active_view" not in st.session_state:
+        st.session_state.active_view = "Hỏi đáp"
 
     agent = get_agent()
     top_k = render_sidebar()
-    chat_tab, nearby_tab = st.tabs(["Hỏi đáp", "Cơ sở gần tôi"])
+    view_options = ["Hỏi đáp", "Cơ sở gần tôi"]
+    selected_view = st.segmented_control(
+        "Khu vực",
+        view_options,
+        default=st.session_state.active_view,
+        label_visibility="collapsed",
+    )
+    if selected_view:
+        st.session_state.active_view = selected_view
 
-    with chat_tab:
+    if st.session_state.active_view == "Hỏi đáp":
         render_chat(agent, top_k)
-    with nearby_tab:
+    else:
         render_nearby_care()
 
 

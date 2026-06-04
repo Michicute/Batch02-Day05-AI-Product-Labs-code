@@ -325,11 +325,7 @@ class RagAgent:
             return True
 
         if self._looks_like_follow_up(question) and conversation_history:
-            recent_user_questions = [
-                turn.get("content", "")
-                for turn in conversation_history[-6:]
-                if turn.get("role") == "user"
-            ]
+            recent_user_questions = self._recent_user_questions(conversation_history)
             return any(
                 self._is_in_scope_question(prev_question, None)
                 for prev_question in recent_user_questions
@@ -344,6 +340,16 @@ class RagAgent:
         if " " in marker or "_" in marker:
             return marker in text
         return re.search(rf"(?<!\w){re.escape(marker)}(?!\w)", text) is not None
+
+    def _recent_user_questions(
+        self,
+        conversation_history: list[dict[str, str]],
+    ) -> list[str]:
+        return [
+            turn.get("content", "")
+            for turn in conversation_history[-8:]
+            if turn.get("role") == "user" and turn.get("content")
+        ]
 
     def _contextualized_question(
         self,
@@ -393,6 +399,16 @@ class RagAgent:
             "tiếp",
             "so sánh",
             "liều dùng",
+            "liều",
+            "mấy tuổi",
+            "bao nhiêu tuổi",
+            "độ tuổi",
+            "tuổi nào",
+            "trẻ mấy tuổi",
+            "dùng được không",
+            "dùng được",
+            "có dùng được",
+            "được dùng",
             "tác dụng phụ",
             "nguy hiểm không",
             "how about",
@@ -401,7 +417,11 @@ class RagAgent:
             "this",
             "it",
         ]
-        return any(marker in q for marker in follow_up_markers)
+        if any(marker in q for marker in follow_up_markers):
+            return True
+
+        words = q.split()
+        return len(words) <= 5 and q.endswith("?")
 
     def _extractive_answer(
         self,
@@ -446,6 +466,7 @@ class RagAgent:
             )
         context = "\n\n".join(context_blocks) or "No retrieved context."
         history = self._format_history_for_prompt(conversation_history)
+        answer_language = self._detect_answer_language(question)
 
         client = OpenAI()
         response = client.responses.create(
@@ -455,8 +476,8 @@ class RagAgent:
                 {
                     "role": "system",
                     "content": (
-                        "You are a cautious medical Q&A assistant answering medical questions only."
-                        "Always answer in the user's language."
+                        "You are a cautious medical Q&A assistant answering medical questions only. "
+                        "Always answer in the requested answer language. "
                         "Prefer the retrieved "
                         "context when it is available, and cite retrieved sources with "
                         "bracket numbers like [1]. If no relevant context is available, "
@@ -469,6 +490,7 @@ class RagAgent:
                 {
                     "role": "user",
                     "content": (
+                        f"Answer language: {answer_language}\n\n"
                         f"Recent conversation:\n{history}\n\n"
                         f"Question: {question}\n\n"
                         f"Retrieved context:\n{context}"
@@ -477,6 +499,56 @@ class RagAgent:
             ],
         )
         return response.output_text
+
+    def _detect_answer_language(self, question: str) -> str:
+        q = question.lower()
+        vietnamese_markers = [
+            "ă",
+            "â",
+            "đ",
+            "ê",
+            "ô",
+            "ơ",
+            "ư",
+            "á",
+            "à",
+            "ả",
+            "ã",
+            "ạ",
+            "é",
+            "è",
+            "ẻ",
+            "ẽ",
+            "ẹ",
+            "í",
+            "ì",
+            "ỉ",
+            "ĩ",
+            "ị",
+            "ó",
+            "ò",
+            "ỏ",
+            "õ",
+            "ọ",
+            "ú",
+            "ù",
+            "ủ",
+            "ũ",
+            "ụ",
+            "ý",
+            "ỳ",
+            "ỷ",
+            "ỹ",
+            "ỵ",
+            "thuốc",
+            "bệnh",
+            "thành phần",
+            "triệu chứng",
+            "điều trị",
+        ]
+        if any(marker in q for marker in vietnamese_markers):
+            return "Vietnamese"
+        return "the same language as the user's question"
 
     def _format_history_for_prompt(
         self,
