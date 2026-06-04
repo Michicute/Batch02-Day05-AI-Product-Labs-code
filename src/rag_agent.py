@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import os
-import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
@@ -165,19 +164,6 @@ class RagAgent:
         source_filter: str | None = None,
         conversation_history: list[dict[str, str]] | None = None,
     ) -> dict[str, object]:
-        if not self._is_in_scope_question(question, conversation_history):
-            answer_text = (
-                "Mình chỉ hỗ trợ các câu hỏi liên quan đến y tế, thuốc, triệu chứng, "
-                "điều trị và gợi ý cơ sở y tế gần bạn. Câu hỏi này nằm ngoài phạm vi "
-                "của ứng dụng, nên mình không thể trả lời."
-            )
-            return {
-                "question": question,
-                "retrieval_question": question,
-                "answer": answer_text,
-                "sources": [],
-            }
-
         retrieval_question = self._contextualized_question(question, conversation_history)
         retrieved = self.retrieve(
             retrieval_question,
@@ -238,108 +224,6 @@ class RagAgent:
         if any(marker in q for marker in medicine_markers):
             return "medicine_catalog"
         return None
-
-    def _is_in_scope_question(
-        self,
-        question: str,
-        conversation_history: list[dict[str, str]] | None,
-    ) -> bool:
-        q = question.lower().strip()
-        if not q:
-            return False
-
-        out_of_scope_markers = [
-            "code",
-            "python",
-            "sklearn",
-            "train_test_split",
-            "javascript",
-            "java",
-            "sql",
-            "html",
-            "css",
-            "github",
-            "git ",
-            "docker",
-            "api",
-            "machine learning",
-            "model training",
-            "viết hàm",
-            "lập trình",
-            "source code",
-        ]
-        in_scope_markers = [
-            "bệnh",
-            "thuốc",
-            "thành phần",
-            "hoạt chất",
-            "triệu chứng",
-            "điều trị",
-            "tác dụng phụ",
-            "liều",
-            "uống",
-            "đau",
-            "sốt",
-            "ho",
-            "tiêu chảy",
-            "dị ứng",
-            "nhiễm",
-            "viêm",
-            "ung thư",
-            "huyết áp",
-            "tiểu đường",
-            "tim",
-            "gan",
-            "thận",
-            "dạ dày",
-            "nhà thuốc",
-            "bệnh viện",
-            "phòng khám",
-            "paracetamol",
-            "acetaminophen",
-            "ibuprofen",
-            "aspirin",
-            "amoxicillin",
-            "augmentin",
-            "cetirizine",
-            "loratadine",
-            "medicine",
-            "drug",
-            "composition",
-            "active ingredient",
-            "disease",
-            "symptom",
-            "treatment",
-            "side effect",
-            "dosage",
-            "hospital",
-            "pharmacy",
-            "clinic",
-        ]
-
-        has_in_scope = self._has_any_marker(q, in_scope_markers)
-        has_out_of_scope = self._has_any_marker(q, out_of_scope_markers)
-        if has_out_of_scope and not has_in_scope:
-            return False
-        if has_in_scope:
-            return True
-
-        if self._looks_like_follow_up(question) and conversation_history:
-            recent_user_questions = self._recent_user_questions(conversation_history)
-            return any(
-                self._is_in_scope_question(prev_question, None)
-                for prev_question in recent_user_questions
-            )
-
-        return False
-
-    def _has_any_marker(self, text: str, markers: list[str]) -> bool:
-        return any(self._has_marker(text, marker) for marker in markers)
-
-    def _has_marker(self, text: str, marker: str) -> bool:
-        if " " in marker or "_" in marker:
-            return marker in text
-        return re.search(rf"(?<!\w){re.escape(marker)}(?!\w)", text) is not None
 
     def _recent_user_questions(
         self,
