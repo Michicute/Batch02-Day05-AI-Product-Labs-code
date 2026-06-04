@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
@@ -162,22 +163,43 @@ class RagAgent:
         use_llm: bool | None = None,
         model: str | None = None,
         source_filter: str | None = None,
+        conversation_history: list[dict[str, str]] | None = None,
     ) -> dict[str, object]:
-        retrieved = self.retrieve(question, top_k=top_k, source_filter=source_filter)
+        if not self._is_in_scope_question(question, conversation_history):
+            answer_text = (
+                "Mình chỉ hỗ trợ các câu hỏi liên quan đến y tế, thuốc, triệu chứng, "
+                "điều trị và gợi ý cơ sở y tế gần bạn. Câu hỏi này nằm ngoài phạm vi "
+                "của ứng dụng, nên mình không thể trả lời."
+            )
+            return {
+                "question": question,
+                "retrieval_question": question,
+                "answer": answer_text,
+                "sources": [],
+            }
+
+        retrieval_question = self._contextualized_question(question, conversation_history)
+        retrieved = self.retrieve(
+            retrieval_question,
+            top_k=top_k,
+            source_filter=source_filter,
+        )
         if use_llm is None:
             use_llm = bool(os.environ.get("OPENAI_API_KEY"))
 
-        if use_llm and retrieved:
+        if use_llm:
             answer_text = self._llm_answer(
                 question=question,
                 retrieved=retrieved,
                 model=model or os.environ.get("OPENAI_MODEL", "gpt-4o-mini"),
+                conversation_history=conversation_history,
             )
         else:
             answer_text = self._extractive_answer(question, retrieved)
 
         return {
             "question": question,
+            "retrieval_question": retrieval_question,
             "answer": answer_text,
             "sources": [
                 {
@@ -213,6 +235,158 @@ class RagAgent:
             return "medicine_catalog"
         return None
 
+    def _is_in_scope_question(
+        self,
+        question: str,
+        conversation_history: list[dict[str, str]] | None,
+    ) -> bool:
+        q = question.lower().strip()
+        if not q:
+            return False
+
+        out_of_scope_markers = [
+            "code",
+            "python",
+            "sklearn",
+            "train_test_split",
+            "javascript",
+            "java",
+            "sql",
+            "html",
+            "css",
+            "github",
+            "git ",
+            "docker",
+            "api",
+            "machine learning",
+            "model training",
+            "viết hàm",
+            "lập trình",
+            "source code",
+        ]
+        in_scope_markers = [
+            "bệnh",
+            "thuốc",
+            "triệu chứng",
+            "điều trị",
+            "tác dụng phụ",
+            "liều",
+            "uống",
+            "đau",
+            "sốt",
+            "ho",
+            "tiêu chảy",
+            "dị ứng",
+            "nhiễm",
+            "viêm",
+            "ung thư",
+            "huyết áp",
+            "tiểu đường",
+            "tim",
+            "gan",
+            "thận",
+            "dạ dày",
+            "nhà thuốc",
+            "bệnh viện",
+            "phòng khám",
+            "medicine",
+            "drug",
+            "disease",
+            "symptom",
+            "treatment",
+            "side effect",
+            "dosage",
+            "hospital",
+            "pharmacy",
+            "clinic",
+        ]
+
+        has_in_scope = self._has_any_marker(q, in_scope_markers)
+        has_out_of_scope = self._has_any_marker(q, out_of_scope_markers)
+        if has_out_of_scope and not has_in_scope:
+            return False
+        if has_in_scope:
+            return True
+
+        if self._looks_like_follow_up(question) and conversation_history:
+            recent_user_questions = [
+                turn.get("content", "")
+                for turn in conversation_history[-6:]
+                if turn.get("role") == "user"
+            ]
+            return any(
+                self._is_in_scope_question(prev_question, None)
+                for prev_question in recent_user_questions
+            )
+
+        return False
+
+    def _has_any_marker(self, text: str, markers: list[str]) -> bool:
+        return any(self._has_marker(text, marker) for marker in markers)
+
+    def _has_marker(self, text: str, marker: str) -> bool:
+        if " " in marker or "_" in marker:
+            return marker in text
+        return re.search(rf"(?<!\w){re.escape(marker)}(?!\w)", text) is not None
+
+    def _contextualized_question(
+        self,
+        question: str,
+        conversation_history: list[dict[str, str]] | None,
+    ) -> str:
+        if not conversation_history:
+            return question
+
+        if not self._looks_like_follow_up(question):
+            return question
+
+        recent_turns = conversation_history[-6:]
+        context_lines = []
+        for turn in recent_turns:
+            role = turn.get("role", "").strip()
+            content = turn.get("content", "").strip()
+            if role != "user":
+                continue
+            if not role or not content:
+                continue
+            if len(content) > 900:
+                content = content[:900].rstrip() + "..."
+            context_lines.append(f"{role}: {content}")
+
+        if not context_lines:
+            return question
+
+        return (
+            "Conversation context:\n"
+            f"{chr(10).join(context_lines)}\n\n"
+            f"Current question: {question}"
+        )
+
+    def _looks_like_follow_up(self, question: str) -> bool:
+        q = question.lower().strip()
+        follow_up_markers = [
+            "nó",
+            "đó",
+            "cái đó",
+            "cái này",
+            "thuốc này",
+            "bệnh này",
+            "triệu chứng này",
+            "vậy",
+            "còn",
+            "tiếp",
+            "so sánh",
+            "liều dùng",
+            "tác dụng phụ",
+            "nguy hiểm không",
+            "how about",
+            "what about",
+            "that",
+            "this",
+            "it",
+        ]
+        return any(marker in q for marker in follow_up_markers)
+
     def _extractive_answer(
         self,
         question: str,
@@ -220,13 +394,13 @@ class RagAgent:
     ) -> str:
         if not retrieved:
             return (
-                "I could not find a relevant answer in the two cleaned datasets. "
-                "Try asking with a medicine name, disease name, symptom, treatment, "
-                "composition, or manufacturer."
+                "Mình chưa tìm thấy nguồn phù hợp trong hai bộ dữ liệu đã làm sạch. "
+                "Bạn có thể hỏi cụ thể hơn bằng tên thuốc, tên bệnh, triệu chứng, "
+                "hướng điều trị, thành phần hoặc nhà sản xuất."
             )
 
         lines = [
-            "I found these relevant records in the local datasets:",
+            "Mình tìm thấy các bản ghi liên quan trong dữ liệu cục bộ:",
         ]
         for idx, item in enumerate(retrieved[:3], start=1):
             doc = item.document
@@ -244,6 +418,7 @@ class RagAgent:
         question: str,
         retrieved: list[RetrievedDocument],
         model: str,
+        conversation_history: list[dict[str, str]] | None = None,
     ) -> str:
         from openai import OpenAI
 
@@ -253,25 +428,30 @@ class RagAgent:
                 f"[{idx}] source={item.document.source}; title={item.document.title}; "
                 f"score={item.score:.4f}\n{item.document.text}"
             )
-        context = "\n\n".join(context_blocks)
+        context = "\n\n".join(context_blocks) or "No retrieved context."
+        history = self._format_history_for_prompt(conversation_history)
 
         client = OpenAI()
         response = client.responses.create(
             model=model,
+            temperature=0,
             input=[
                 {
                     "role": "system",
                     "content": (
-                        "You are a cautious medical Q&A RAG assistant. Answer only "
-                        "from the provided context. If the context is insufficient, "
-                        "say that clearly. Do not diagnose. Encourage professional "
-                        "medical advice for urgent, risky, or personal treatment "
-                        "decisions. Cite sources with bracket numbers like [1]."
+                        "You are a cautious medical Q&A assistant answering medical questions only. Prefer the retrieved "
+                        "context when it is available, and cite retrieved sources with "
+                        "bracket numbers like [1]. If no relevant context is available, "
+                        "answer using general medical knowledge, say that no local source "
+                        "was found, and do not invent citations. Do not diagnose. "
+                        "Encourage professional medical advice for urgent, risky, or "
+                        "personal treatment decisions. Always answer in the user's language."
                     ),
                 },
                 {
                     "role": "user",
                     "content": (
+                        f"Recent conversation:\n{history}\n\n"
                         f"Question: {question}\n\n"
                         f"Retrieved context:\n{context}"
                     ),
@@ -279,6 +459,24 @@ class RagAgent:
             ],
         )
         return response.output_text
+
+    def _format_history_for_prompt(
+        self,
+        conversation_history: list[dict[str, str]] | None,
+    ) -> str:
+        if not conversation_history:
+            return "No previous conversation."
+
+        lines = []
+        for turn in conversation_history[-6:]:
+            role = turn.get("role", "").strip()
+            content = turn.get("content", "").strip()
+            if not role or not content:
+                continue
+            if len(content) > 1200:
+                content = content[:1200].rstrip() + "..."
+            lines.append(f"{role}: {content}")
+        return "\n".join(lines) if lines else "No previous conversation."
 
 
 def main() -> None:
