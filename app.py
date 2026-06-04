@@ -7,6 +7,7 @@ from urllib.request import Request, urlopen
 
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 from streamlit_geolocation import streamlit_geolocation
 
 from src.rag_agent import RagAgent
@@ -52,14 +53,18 @@ def inject_styles() -> None:
         """
         <style>
         :root {
-          --app-border: #d8dee8;
-          --app-muted: #667085;
+          --app-blue: #0875d1;
+          --app-blue-dark: #0458a3;
+          --app-blue-soft: #e8f4ff;
+          --app-border: #d7e2ef;
+          --app-muted: #5d6b82;
           --app-surface: #ffffff;
-          --app-soft: #f7f9fc;
-          --app-shell: #f3f6fa;
+          --app-soft: #f4f9ff;
+          --app-shell: #eaf3ff;
           --app-text: #101828;
-          --app-accent: #1f7a6b;
-          --app-accent-soft: #e8f5f1;
+          --app-accent: #0f8f83;
+          --app-accent-soft: #e7faf6;
+          --app-warning: #ffb43b;
         }
 
         html, body, [data-testid="stAppViewContainer"], .stApp {
@@ -68,14 +73,14 @@ def inject_styles() -> None:
         }
 
         [data-testid="stHeader"] {
-          background: rgba(243, 246, 250, 0.92) !important;
-          border-bottom: 1px solid rgba(216, 222, 232, 0.72);
+          background: rgba(234, 243, 255, 0.92) !important;
+          border-bottom: 1px solid rgba(215, 226, 239, 0.72);
         }
 
         .block-container {
-          padding-top: 2rem;
-          padding-bottom: 8rem;
-          max-width: 1180px;
+          max-width: 1120px;
+          padding-bottom: 3rem;
+          padding-top: 1.2rem;
         }
 
         [data-testid="stSidebar"] {
@@ -101,41 +106,544 @@ def inject_styles() -> None:
           letter-spacing: 0;
         }
 
-        div[data-testid="stCaptionContainer"] {
+        p, li, div[data-testid="stCaptionContainer"] {
           color: var(--app-muted);
         }
 
-        .app-hero {
+        .topbar {
+          background: linear-gradient(180deg, var(--app-blue), var(--app-blue-dark));
+          border-radius: 0 0 8px 8px;
+          box-shadow: 0 14px 34px rgba(8, 117, 209, 0.22);
+          color: #ffffff;
+          margin: -1.2rem calc(50% - 50vw) 1rem;
+          padding: 0.65rem max(1rem, calc((100vw - 1120px) / 2));
+        }
+
+        .topbar-inner {
+          align-items: center;
+          display: flex;
+          gap: 1rem;
+          justify-content: space-between;
+        }
+
+        .brand {
+          align-items: center;
+          display: flex;
+          gap: 0.7rem;
+          font-weight: 800;
+        }
+
+        .brand-mark {
+          align-items: center;
+          background: #ffffff;
+          border-radius: 6px;
+          color: var(--app-blue);
+          display: flex;
+          font-size: 0.9rem;
+          font-weight: 900;
+          height: 36px;
+          justify-content: center;
+          width: 36px;
+        }
+
+        .brand-sub {
+          display: block;
+          font-size: 0.72rem;
+          font-weight: 600;
+          opacity: 0.86;
+        }
+
+        .nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.7rem;
+          justify-content: flex-end;
+        }
+
+        .nav span {
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          border-radius: 999px;
+          color: #ffffff;
+          font-size: 0.83rem;
+          padding: 0.35rem 0.7rem;
+        }
+
+        .hero-grid {
+          display: grid;
+          gap: 0.9rem;
+          grid-template-columns: 1.65fr 1fr;
+          margin-bottom: 0.9rem;
+        }
+
+        .hero-main,
+        .promo-card,
+        .section-card,
+        .chat-shell {
           background: var(--app-surface);
           border: 1px solid var(--app-border);
           border-radius: 8px;
-          border-bottom: 1px solid var(--app-border);
-          box-shadow: 0 8px 28px rgba(16, 24, 40, 0.06);
-          margin-bottom: 1.2rem;
-          padding: 1.2rem 1.25rem;
+          box-shadow: 0 12px 28px rgba(16, 24, 40, 0.08);
+        }
+
+        .hero-main {
+          background:
+            radial-gradient(circle at 86% 20%, rgba(255, 255, 255, 0.25), transparent 24%),
+            radial-gradient(circle at 88% 78%, rgba(255, 198, 64, 0.38), transparent 26%),
+            linear-gradient(135deg, #03bfe8 0%, #0875d1 52%, #055cad 100%);
+          color: #ffffff;
+          min-height: 286px;
+          overflow: hidden;
+          padding: 1.45rem 18rem 1.45rem 1.45rem;
+          position: relative;
+        }
+
+        .hero-main::after {
+          background: rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          border-radius: 8px;
+          content: "MED";
+          font-size: 2.8rem;
+          font-weight: 900;
+          line-height: 1;
+          padding: 1.65rem 1rem;
+          position: absolute;
+          right: 1.4rem;
+          top: 2.2rem;
+          width: 12.8rem;
+          text-align: center;
         }
 
         .app-kicker {
-          color: var(--app-accent);
-          font-size: 0.85rem;
-          font-weight: 700;
-          margin-bottom: 0.25rem;
+          color: #dcf7ff;
+          font-size: 0.83rem;
+          font-weight: 800;
+          margin-bottom: 0.35rem;
           text-transform: uppercase;
         }
 
         .app-title {
-          color: var(--app-text);
-          font-size: 2rem;
-          font-weight: 760;
-          line-height: 1.15;
+          color: #ffffff;
+          font-size: 2.15rem;
+          font-weight: 820;
+          line-height: 1.08;
           margin: 0;
+          max-width: 620px;
         }
 
         .app-subtitle {
-          color: var(--app-muted);
+          color: rgba(255, 255, 255, 0.9);
           font-size: 1rem;
+          margin-top: 0.55rem;
+          max-width: 540px;
+        }
+
+        .hero-badges {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-top: 1.25rem;
+        }
+
+        .hero-badges span {
+          background: rgba(255, 255, 255, 0.18);
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          border-radius: 999px;
+          color: #ffffff;
+          font-size: 0.86rem;
+          font-weight: 700;
+          padding: 0.38rem 0.75rem;
+        }
+
+        .promo-stack {
+          display: grid;
+          gap: 0.9rem;
+        }
+
+        .promo-card {
+          min-height: 117px;
+          padding: 1rem;
+        }
+
+        .promo-card.primary {
+          background: linear-gradient(135deg, #fff7db, #ffffff);
+        }
+
+        .promo-card.secondary {
+          background: linear-gradient(135deg, #e8f4ff, #ffffff);
+        }
+
+        .promo-label {
+          color: var(--app-blue);
+          font-size: 0.76rem;
+          font-weight: 800;
+          text-transform: uppercase;
+        }
+
+        .promo-title {
+          color: var(--app-text);
+          font-size: 1.1rem;
+          font-weight: 780;
+          line-height: 1.25;
+          margin-top: 0.25rem;
+        }
+
+        .promo-note {
+          color: var(--app-muted);
+          font-size: 0.9rem;
+          margin-top: 0.35rem;
+        }
+
+        .quick-grid {
+          display: grid;
+          gap: 0.65rem;
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          margin-bottom: 0.9rem;
+        }
+
+        .quick-tile {
+          align-items: flex-start;
+          background: var(--app-surface);
+          border: 1px solid var(--app-border);
+          border-radius: 8px;
+          box-shadow: 0 8px 18px rgba(16, 24, 40, 0.055);
+          color: var(--app-text);
+          display: flex;
+          gap: 0.55rem;
+          flex-direction: column;
+          min-height: 92px;
+          padding: 0.7rem;
+        }
+
+        .quick-icon {
+          align-items: center;
+          background: var(--app-blue-soft);
+          border-radius: 6px;
+          color: var(--app-blue);
+          display: flex;
+          flex: 0 0 34px;
+          font-size: 0.72rem;
+          font-weight: 900;
+          height: 34px;
+          justify-content: center;
+        }
+
+        .quick-title {
+          color: var(--app-text);
+          font-size: 0.88rem;
+          font-weight: 730;
+          line-height: 1.25;
+        }
+
+        .quick-desc {
+          color: var(--app-muted);
+          font-size: 0.76rem;
+          line-height: 1.28;
+        }
+
+        .section-card {
+          margin-bottom: 0.9rem;
+          padding: 1rem;
+        }
+
+        .section-head {
+          align-items: baseline;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 0.75rem;
+        }
+
+        .section-head h2 {
+          font-size: 1.15rem;
+          margin: 0;
+        }
+
+        .section-head span {
+          color: var(--app-blue);
+          font-size: 0.86rem;
+          font-weight: 720;
+        }
+
+        .product-grid {
+          display: grid;
+          gap: 0.7rem;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+
+        .product-card {
+          background: #ffffff;
+          border: 1px solid var(--app-border);
+          border-radius: 8px;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .product-art {
+          align-items: center;
+          background:
+            radial-gradient(circle at 50% 35%, #ffffff 0 28%, transparent 29%),
+            linear-gradient(135deg, #e8f4ff, #d8eeff);
+          color: var(--app-blue);
+          display: flex;
+          font-weight: 900;
+          height: 112px;
+          justify-content: center;
+        }
+
+        .sale-badge {
+          background: #ff4d5f;
+          border-radius: 0 0 6px 0;
+          color: #ffffff;
+          font-size: 0.72rem;
+          font-weight: 820;
+          left: 0;
+          padding: 0.25rem 0.45rem;
+          position: absolute;
+          top: 0;
+        }
+
+        .product-body {
+          padding: 0.75rem;
+        }
+
+        .product-name {
+          color: var(--app-text);
+          font-size: 0.9rem;
+          font-weight: 720;
+          min-height: 48px;
+        }
+
+        .product-price {
+          color: var(--app-blue);
+          font-size: 0.92rem;
+          font-weight: 820;
           margin-top: 0.45rem;
-          max-width: 760px;
+        }
+
+        .product-meta {
+          color: var(--app-muted);
+          font-size: 0.76rem;
+          margin-top: 0.28rem;
+        }
+
+        .product-cta {
+          background: var(--app-blue);
+          border-radius: 6px;
+          color: #ffffff;
+          font-size: 0.78rem;
+          font-weight: 780;
+          margin-top: 0.55rem;
+          padding: 0.38rem 0.55rem;
+          text-align: center;
+        }
+
+        .health-band {
+          align-items: center;
+          background: linear-gradient(135deg, #0b7ee8, #11a8d9);
+          border-radius: 8px;
+          color: #ffffff;
+          display: grid;
+          gap: 0.85rem;
+          grid-template-columns: 1.2fr repeat(3, 1fr);
+          margin-bottom: 0.9rem;
+          padding: 1rem;
+        }
+
+        .health-band h2 {
+          color: #ffffff;
+          font-size: 1.15rem;
+          margin: 0 0 0.25rem;
+        }
+
+        .health-band p {
+          color: rgba(255, 255, 255, 0.88);
+          margin: 0;
+        }
+
+        .health-chip {
+          background: rgba(255, 255, 255, 0.16);
+          border: 1px solid rgba(255, 255, 255, 0.24);
+          border-radius: 8px;
+          color: #ffffff;
+          font-weight: 720;
+          min-height: 72px;
+          padding: 0.75rem;
+        }
+
+        .chat-shell {
+          margin-bottom: 0.9rem;
+          padding: 1rem;
+        }
+
+        .chat-title-row {
+          align-items: center;
+          border-bottom: 1px solid var(--app-border);
+          display: flex;
+          gap: 0.75rem;
+          margin-bottom: 0.85rem;
+          padding-bottom: 0.8rem;
+        }
+
+        .chat-avatar {
+          align-items: center;
+          background: linear-gradient(135deg, #ff6b73, #ff3f58);
+          border-radius: 8px;
+          color: #ffffff;
+          display: flex;
+          font-weight: 900;
+          height: 42px;
+          justify-content: center;
+          width: 42px;
+        }
+
+        .chat-heading {
+          color: var(--app-text);
+          font-size: 1.2rem;
+          font-weight: 800;
+          line-height: 1.2;
+        }
+
+        .chat-subheading {
+          color: var(--app-muted);
+          font-size: 0.9rem;
+          margin-top: 0.15rem;
+        }
+
+        .chat-input-box {
+          background: var(--app-soft);
+          border: 1px solid var(--app-border);
+          border-radius: 8px;
+          margin-top: 0.85rem;
+          padding: 0.8rem;
+        }
+
+        div[data-testid="stPopover"] {
+          bottom: 1.35rem;
+          position: fixed;
+          right: 1.35rem;
+          z-index: 1000;
+        }
+
+        div[data-testid="stPopover"] > button {
+          align-items: center;
+          background: linear-gradient(135deg, #0875d1, #0f8f83) !important;
+          border: 2px solid #ffffff;
+          border-radius: 999px !important;
+          box-shadow: 0 16px 34px rgba(8, 117, 209, 0.3);
+          color: #ffffff !important;
+          display: flex;
+          gap: 0.35rem;
+          font-weight: 900;
+          height: 54px;
+          justify-content: center;
+          min-height: 54px;
+          padding: 0 0.95rem !important;
+          width: auto;
+        }
+
+        div[data-testid="stPopover"] > button p {
+          color: #ffffff !important;
+          font-weight: 900;
+        }
+
+        .mock-row {
+          display: grid;
+          gap: 0.9rem;
+          grid-template-columns: 1.1fr 1fr;
+          margin-bottom: 0.9rem;
+        }
+
+        .campaign-card {
+          background: #ffffff;
+          border: 1px solid var(--app-border);
+          border-radius: 8px;
+          box-shadow: 0 12px 28px rgba(16, 24, 40, 0.08);
+          overflow: hidden;
+        }
+
+        .campaign-banner {
+          background: linear-gradient(135deg, #ffcf54, #ff7a45);
+          color: #592300;
+          font-size: 1.35rem;
+          font-weight: 900;
+          padding: 1rem;
+          text-align: center;
+        }
+
+        .campaign-body {
+          display: grid;
+          gap: 0.55rem;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          padding: 0.9rem;
+        }
+
+        .time-box {
+          background: var(--app-soft);
+          border: 1px solid var(--app-border);
+          border-radius: 8px;
+          color: var(--app-text);
+          font-weight: 760;
+          min-height: 58px;
+          padding: 0.65rem;
+          text-align: center;
+        }
+
+        .article-grid {
+          display: grid;
+          gap: 0.7rem;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .article-card {
+          background: #ffffff;
+          border: 1px solid var(--app-border);
+          border-radius: 8px;
+          padding: 0.85rem;
+        }
+
+        .article-tag {
+          color: var(--app-blue);
+          font-size: 0.74rem;
+          font-weight: 820;
+          text-transform: uppercase;
+        }
+
+        .article-title {
+          color: var(--app-text);
+          font-weight: 760;
+          line-height: 1.32;
+          margin-top: 0.35rem;
+        }
+
+        .site-footer {
+          background: var(--app-blue);
+          border-radius: 8px 8px 0 0;
+          color: #ffffff;
+          margin-top: 1rem;
+          padding: 1rem;
+        }
+
+        .site-footer p,
+        .site-footer strong {
+          color: #ffffff;
+        }
+
+        .brand-strip {
+          display: grid;
+          gap: 0.7rem;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          margin-bottom: 0.9rem;
+        }
+
+        .brand-card {
+          background: #ffffff;
+          border: 1px solid var(--app-border);
+          border-radius: 8px;
+          box-shadow: 0 8px 18px rgba(16, 24, 40, 0.055);
+          color: var(--app-text);
+          font-weight: 820;
+          padding: 0.85rem;
+          text-align: center;
         }
 
         .empty-state {
@@ -252,39 +760,6 @@ def inject_styles() -> None:
           color: var(--app-text);
         }
 
-        div[data-testid="stChatInput"] {
-          background: rgba(243, 246, 250, 0.98) !important;
-          border-top: 1px solid var(--app-border);
-          bottom: 0;
-          box-shadow: 0 -10px 30px rgba(16, 24, 40, 0.08);
-          left: 0;
-          padding: 0.75rem 2rem 0.95rem;
-          position: fixed;
-          right: 0;
-          z-index: 999;
-        }
-
-        div[data-testid="stChatInput"] > div {
-          margin: 0 auto;
-          max-width: 860px;
-          width: 100%;
-        }
-
-        div[data-testid="stChatInput"] textarea {
-          border: 1px solid var(--app-border) !important;
-          border-radius: 8px !important;
-          box-shadow: 0 2px 10px rgba(16, 24, 40, 0.06);
-          min-height: 46px !important;
-        }
-
-        @media (max-width: 900px) {
-          div[data-testid="stChatInput"] {
-            left: 0;
-            padding-left: 1rem;
-            padding-right: 1rem;
-          }
-        }
-
         textarea,
         input,
         [data-baseweb="input"] input,
@@ -320,8 +795,8 @@ def inject_styles() -> None:
 
         .stButton > button[kind="primary"],
         button[kind="primary"] {
-          background: var(--app-accent) !important;
-          border-color: var(--app-accent) !important;
+          background: var(--app-blue) !important;
+          border-color: var(--app-blue) !important;
           color: #ffffff !important;
         }
 
@@ -341,6 +816,53 @@ def inject_styles() -> None:
           background: #f8fafc !important;
           border: 1px solid var(--app-border);
           border-radius: 8px;
+        }
+
+        [data-testid="stForm"] {
+          background: transparent !important;
+          border: 0 !important;
+          padding: 0 !important;
+        }
+
+        @media (max-width: 900px) {
+          .hero-grid,
+          .mock-row,
+          .health-band {
+            grid-template-columns: 1fr;
+          }
+
+          .quick-grid,
+          .product-grid,
+          .article-grid,
+          .brand-strip {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .hero-main::after {
+            display: none;
+          }
+
+          .hero-main {
+            padding-right: 1.45rem;
+          }
+
+          .app-title {
+            font-size: 1.8rem;
+          }
+
+          .nav {
+            justify-content: flex-start;
+          }
+        }
+
+        @media (max-width: 1180px) {
+          .hero-main {
+            padding-right: 1.45rem;
+          }
+
+          .hero-main::after {
+            display: none;
+          }
         }
         </style>
         """,
@@ -505,12 +1027,221 @@ def format_address(tags: dict[str, str]) -> str:
 def render_header() -> None:
     st.markdown(
         """
-        <div class="app-hero">
-          <div class="app-kicker">Trợ lý hỏi đáp y tế</div>
-          <h1 class="app-title">Tra cứu thông tin thuốc, bệnh và cơ sở y tế gần bạn</h1>
-          <div class="app-subtitle">
-            Hệ thống dùng dữ liệu cục bộ để truy xuất nguồn liên quan, sau đó tạo câu trả lời bằng OpenAI.
+        <div class="topbar">
+          <div class="topbar-inner">
+            <div class="brand">
+              <div class="brand-mark">YT</div>
+              <div>
+                Trợ lý y tế
+                <span class="brand-sub">Tra cứu thuốc và chăm sóc sức khỏe</span>
+              </div>
+            </div>
+            <div class="nav">
+              <span>Thuốc</span>
+              <span>Bệnh thường gặp</span>
+              <span>Cơ sở y tế</span>
+              <span>Tư vấn AI</span>
+            </div>
           </div>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-main">
+            <div class="app-kicker">Nhà thuốc số và trợ lý AI</div>
+            <h1 class="app-title">Mua thuốc an tâm, hỏi sức khỏe nhanh trong một nơi</h1>
+            <div class="app-subtitle">
+              Giao diện bán thuốc mẫu với danh mục, sản phẩm, khuyến mãi và trợ lý y tế mở bằng nút nổi ở góc phải.
+            </div>
+            <div class="hero-badges">
+              <span>Giao nhanh trong ngày</span>
+              <span>Tư vấn dược sĩ</span>
+              <span>Tra cứu bằng AI</span>
+            </div>
+          </div>
+          <div class="promo-stack">
+            <div class="promo-card primary">
+              <div class="promo-label">Ưu đãi hôm nay</div>
+              <div class="promo-title">Giảm đến 35% nhóm vitamin và chăm sóc tiêu hóa</div>
+              <div class="promo-note">Mock data dùng để mô phỏng trang bán thuốc.</div>
+            </div>
+            <div class="promo-card secondary">
+              <div class="promo-label">Trợ lý y tế</div>
+              <div class="promo-title">Bấm nút nổi để hỏi thuốc, triệu chứng hoặc tìm cơ sở gần bạn</div>
+              <div class="promo-note">Chatbot mở trong popup, không rời khỏi trang hiện tại.</div>
+            </div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_storefront_sections() -> None:
+    st.markdown(
+        """
+        <div class="quick-grid">
+          <div class="quick-tile"><div class="quick-icon">RX</div><div class="quick-title">Thuốc kê đơn</div><div class="quick-desc">Tư vấn trước khi dùng</div></div>
+          <div class="quick-tile"><div class="quick-icon">OTC</div><div class="quick-title">Thuốc không kê đơn</div><div class="quick-desc">Sốt, ho, tiêu hóa</div></div>
+          <div class="quick-tile"><div class="quick-icon">VIT</div><div class="quick-title">Vitamin</div><div class="quick-desc">Bổ sung hằng ngày</div></div>
+          <div class="quick-tile"><div class="quick-icon">MOM</div><div class="quick-title">Mẹ và bé</div><div class="quick-desc">Chăm sóc gia đình</div></div>
+          <div class="quick-tile"><div class="quick-icon">MED</div><div class="quick-title">Thiết bị y tế</div><div class="quick-desc">Máy đo, khẩu trang</div></div>
+          <div class="quick-tile"><div class="quick-icon">MAP</div><div class="quick-title">Cơ sở gần bạn</div><div class="quick-desc">Nhà thuốc, bệnh viện</div></div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head">
+            <h2>Thương hiệu được quan tâm</h2>
+            <span>Dữ liệu mẫu</span>
+          </div>
+          <div class="brand-strip">
+            <div class="brand-card">Panadol</div>
+            <div class="brand-card">Berocca</div>
+            <div class="brand-card">Oresol</div>
+            <div class="brand-card">Cetaphil</div>
+            <div class="brand-card">Omron</div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head">
+            <h2>Danh mục nổi bật</h2>
+            <span>Xem thêm</span>
+          </div>
+          <div class="product-grid">
+            <div class="product-card">
+              <div class="sale-badge">-12%</div>
+              <div class="product-art">PARA</div>
+              <div class="product-body">
+                <div class="product-name">Nhóm giảm đau, hạ sốt</div>
+                <div class="product-meta">120 sản phẩm</div>
+                <div class="product-price">Từ 18.000đ</div>
+                <div class="product-cta">Xem nhóm hàng</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="sale-badge">Hot</div>
+              <div class="product-art">DIGEST</div>
+              <div class="product-body">
+                <div class="product-name">Tiêu hóa và dạ dày</div>
+                <div class="product-meta">Men vi sinh, oresol</div>
+                <div class="product-price">Từ 4.000đ</div>
+                <div class="product-cta">Xem nhóm hàng</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="sale-badge">-25%</div>
+              <div class="product-art">VIT</div>
+              <div class="product-body">
+                <div class="product-name">Vitamin và khoáng chất</div>
+                <div class="product-meta">C, D3, kẽm, multivitamin</div>
+                <div class="product-price">Từ 79.000đ</div>
+                <div class="product-cta">Xem nhóm hàng</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-art">CARE</div>
+              <div class="product-body">
+                <div class="product-name">Chăm sóc cá nhân</div>
+                <div class="product-meta">Da, tóc, răng miệng</div>
+                <div class="product-price">Từ 35.000đ</div>
+                <div class="product-cta">Xem nhóm hàng</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="sale-badge">New</div>
+              <div class="product-art">DEVICE</div>
+              <div class="product-body">
+                <div class="product-name">Thiết bị theo dõi sức khỏe</div>
+                <div class="product-meta">Máy đo huyết áp, nhiệt kế</div>
+                <div class="product-price">Từ 129.000đ</div>
+                <div class="product-cta">Xem nhóm hàng</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mock-row">
+          <div class="campaign-card">
+            <div class="campaign-banner">FLASHSALE SỨC KHỎE</div>
+            <div class="campaign-body">
+              <div class="time-box">08:00 - 12:00<br>Đang mở</div>
+              <div class="time-box">12:00 - 18:00<br>Sắp diễn ra</div>
+              <div class="time-box">18:00 - 22:00<br>Sắp diễn ra</div>
+            </div>
+          </div>
+          <div class="section-card" style="margin-bottom:0;">
+            <div class="section-head">
+              <h2>Dịch vụ nhanh</h2>
+              <span>Mock data</span>
+            </div>
+            <div class="quick-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:0;">
+              <div class="quick-tile"><div class="quick-icon">KN</div><div class="quick-title">Kiểm tra nguy cơ</div></div>
+              <div class="quick-tile"><div class="quick-icon">DT</div><div class="quick-title">Đặt thuốc tư vấn</div></div>
+              <div class="quick-tile"><div class="quick-icon">LH</div><div class="quick-title">Liên hệ cơ sở gần nhất</div></div>
+              <div class="quick-tile"><div class="quick-icon">HS</div><div class="quick-title">Lưu lịch sử hỏi đáp</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="health-band">
+          <div>
+            <h2>Kiểm tra sức khỏe cùng trợ lý</h2>
+            <p>Nhập câu hỏi bên dưới để nhận gợi ý phù hợp với ngữ cảnh hội thoại.</p>
+          </div>
+          <div class="health-chip">Tác dụng phụ của thuốc</div>
+          <div class="health-chip">Thành phần và công dụng</div>
+          <div class="health-chip">Cơ sở y tế gần nhất</div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head">
+            <h2>Sản phẩm bán chạy</h2>
+            <span>Dữ liệu mẫu</span>
+          </div>
+          <div class="product-grid">
+            <div class="product-card">
+              <div class="sale-badge">-10%</div>
+              <div class="product-art">PARA</div>
+              <div class="product-body"><div class="product-name">Paracetamol 500mg hộp 10 vỉ</div><div class="product-meta">Đã bán 2.1k | 4.8/5</div><div class="product-price">28.000đ / hộp</div><div class="product-cta">Thêm vào giỏ</div></div>
+            </div>
+            <div class="product-card">
+              <div class="sale-badge">-8%</div>
+              <div class="product-art">ORS</div>
+              <div class="product-body"><div class="product-name">Gói bù nước Oresol vị cam</div><div class="product-meta">Đã bán 890 | 4.7/5</div><div class="product-price">4.000đ / gói</div><div class="product-cta">Thêm vào giỏ</div></div>
+            </div>
+            <div class="product-card">
+              <div class="sale-badge">-20%</div>
+              <div class="product-art">VIT C</div>
+              <div class="product-body"><div class="product-name">Vitamin C 500mg lọ 100 viên</div><div class="product-meta">Đã bán 1.4k | 4.9/5</div><div class="product-price">95.000đ / lọ</div><div class="product-cta">Thêm vào giỏ</div></div>
+            </div>
+            <div class="product-card">
+              <div class="sale-badge">Hot</div>
+              <div class="product-art">MEN</div>
+              <div class="product-body"><div class="product-name">Men vi sinh hỗ trợ tiêu hóa</div><div class="product-meta">Đã bán 730 | 4.6/5</div><div class="product-price">120.000đ / hộp</div><div class="product-cta">Thêm vào giỏ</div></div>
+            </div>
+            <div class="product-card">
+              <div class="sale-badge">-15%</div>
+              <div class="product-art">SALINE</div>
+              <div class="product-body"><div class="product-name">Dung dịch nhỏ mũi sinh lý</div><div class="product-meta">Đã bán 610 | 4.8/5</div><div class="product-price">32.000đ / chai</div><div class="product-cta">Thêm vào giỏ</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head">
+            <h2>Góc sức khỏe</h2>
+            <span>Bài viết mẫu</span>
+          </div>
+          <div class="article-grid">
+            <div class="article-card"><div class="article-tag">Dược phẩm</div><div class="article-title">Dùng thuốc hạ sốt thế nào để tránh quá liều?</div></div>
+            <div class="article-card"><div class="article-tag">Tiêu hóa</div><div class="article-title">Khi nào tiêu chảy cần đi khám ngay?</div></div>
+            <div class="article-card"><div class="article-tag">Cấp cứu</div><div class="article-title">Các bước cần làm khi uống nhầm hóa chất.</div></div>
+          </div>
+        </div>
+
+        <div class="site-footer">
+          <strong>Hệ thống nhà thuốc mẫu</strong>
+          <p>Giao diện demo dùng mock data. Chatbot AI mở bằng nút Trợ lý ở góc phải màn hình.</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -703,6 +1434,37 @@ def render_chat_history() -> None:
                     render_location_permission_request()
 
 
+def render_chat_autoscroll() -> None:
+    components.html(
+        """
+        <script>
+        const scrollChatToBottom = () => {
+          const doc = window.parent.document;
+          const messages = doc.querySelectorAll('[data-testid="stChatMessage"]');
+          const target = messages.length
+            ? messages[messages.length - 1]
+            : doc.querySelector('input[aria-label="Câu hỏi"]');
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "end" });
+          }
+
+          const popoverPanels = doc.querySelectorAll('[data-testid="stPopover"] + div, [role="dialog"]');
+          popoverPanels.forEach((panel) => {
+            if (panel && panel.scrollHeight > panel.clientHeight) {
+              panel.scrollTop = panel.scrollHeight;
+            }
+          });
+        };
+
+        setTimeout(scrollChatToBottom, 80);
+        setTimeout(scrollChatToBottom, 320);
+        setTimeout(scrollChatToBottom, 750);
+        </script>
+        """,
+        height=0,
+    )
+
+
 def render_location_permission_request() -> None:
     location = streamlit_geolocation()
     has_browser_location = (
@@ -739,27 +1501,57 @@ def render_location_permission_request() -> None:
 
 
 def render_chat(agent: RagAgent, top_k: int) -> None:
-    render_chat_history()
-
-    question = st.chat_input(
-        placeholder="Nhập câu hỏi, ví dụ: Thuốc Augmentin 625 Duo có tác dụng phụ gì?",
+    st.markdown(
+        """
+        <div class="chat-title-row">
+          <div class="chat-avatar">AI</div>
+          <div>
+            <div class="chat-heading">Trợ lý y tế</div>
+            <div class="chat-subheading">Hỏi về thuốc, triệu chứng hoặc nhờ tìm cơ sở y tế gần bạn.</div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
-    if not question:
-        if not st.session_state.messages:
-            st.markdown(
-                """
-                <div class="empty-state">
-                  Bạn có thể hỏi về triệu chứng, bệnh, hướng điều trị, thành phần thuốc,
-                  tác dụng phụ hoặc nhà sản xuất thuốc.
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+
+    render_chat_history()
+    if st.session_state.messages:
+        render_chat_autoscroll()
+
+    if not st.session_state.messages:
+        st.markdown(
+            """
+            <div class="empty-state">
+              Bạn có thể hỏi về triệu chứng, bệnh, hướng điều trị, thành phần thuốc,
+              tác dụng phụ hoặc nhờ mình tìm cơ sở y tế gần bạn.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with st.container(border=True):
+        with st.form("medical_chat_form", clear_on_submit=True):
+            col_input, col_send = st.columns([8, 1.2])
+            with col_input:
+                question = st.text_input(
+                    "Câu hỏi",
+                    placeholder="Ví dụ: Thuốc Augmentin 625 Duo có tác dụng phụ gì?",
+                    label_visibility="collapsed",
+                )
+            with col_send:
+                submitted = st.form_submit_button(
+                    "Gửi",
+                    type="primary",
+                    use_container_width=True,
+                )
+
+    if not submitted or not question:
         return
 
     st.session_state.messages.append({"role": "user", "content": question})
     with st.chat_message("user"):
         st.write(question)
+    render_chat_autoscroll()
 
     if is_nearby_care_request(question):
         request_location_for_nearby_care("Tất cả")
@@ -794,9 +1586,16 @@ def render_chat(agent: RagAgent, top_k: int) -> None:
         "sources": result["sources"],
     }
     st.session_state.messages.append(assistant_message)
-    with st.chat_message("assistant"):
-        st.write(result["answer"])
-        render_sources(result["sources"])
+    st.rerun()
+
+
+def render_chat_launcher(agent: RagAgent, top_k: int) -> None:
+    with st.popover(
+        "Tư vấn",
+        help="Mở trợ lý y tế",
+        icon=":material/support_agent:",
+    ):
+        render_chat(agent, top_k)
 
 
 def render_nearby_results(
@@ -903,6 +1702,7 @@ def render_nearby_care() -> None:
 def main() -> None:
     inject_styles()
     render_header()
+    render_storefront_sections()
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -913,7 +1713,7 @@ def main() -> None:
 
     agent = get_agent()
     top_k = render_sidebar()
-    render_chat(agent, top_k)
+    render_chat_launcher(agent, top_k)
 
 
 if __name__ == "__main__":
