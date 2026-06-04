@@ -518,9 +518,9 @@ def inject_styles() -> None:
         }
 
         div[data-testid="stPopover"] {
-          bottom: 1.15rem;
+          bottom: 6.2rem;
           position: fixed;
-          right: 1.15rem;
+          right: 1.25rem;
           width: 44px !important;
           z-index: 1000;
         }
