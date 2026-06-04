@@ -1,0 +1,11 @@
+,Medicine_Details.csv,medicine_clean.csv,delta_clean_minus_raw
+rows,11825,11741,-84
+columns,9,9,0
+missing_total,0,0,0
+exact_duplicates,84,0,-84
+duplicate_medicine_name,327,243,-84
+duplicate_image_url,85,1,-84
+review_sum_not_100,0,0,0
+review_outside_0_100,0,0,0
+uses_with_semicolon,0,2729,2729
+composition_plus_spacing_issues,208,0,-208

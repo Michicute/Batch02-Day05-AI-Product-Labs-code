@@ -1,0 +1,14 @@
+column,dtype,missing_count,missing_pct,unique_count,duplicate_count
+Medicine Name,object,0,0.0,11498,327
+Composition,object,0,0.0,3358,8467
+Uses,object,0,0.0,712,11113
+Side_effects,object,0,0.0,1512,10313
+Image URL,object,0,0.0,11740,85
+Manufacturer,object,0,0.0,759,11066
+Excellent Review %,int64,0,0.0,85,11740
+Average Review %,int64,0,0.0,79,11746
+Poor Review %,int64,0,0.0,81,11744
+Medicine Name_words,int64,0,0.0,10,11815
+Composition_words,int64,0,0.0,29,11796
+Uses_words,int64,0,0.0,26,11799
+Side_effects_words,int64,0,0.0,63,11762

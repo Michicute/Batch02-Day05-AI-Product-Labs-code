@@ -1,0 +1,6 @@
+metric,train.csv,data_clean.csv
+rows,16407,16359
+exact_duplicates,48,0
+duplicate_questions,1428,1382
+duplicate_answers,590,550
+question_double_qmark,322,0

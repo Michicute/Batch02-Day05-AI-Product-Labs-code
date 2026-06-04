@@ -1,0 +1,771 @@
+Manufacturer,raw_count,clean_count,removed
+Talent India ,49,0,49
+Percos India Pvt  Ltd,15,0,15
+Jawa Pharmaceuticals  Pvt Ltd,8,0,8
+Intas Pharmaceuticals Ltd,654,648,6
+Cipla Ltd,574,569,5
+Torrent Pharmaceuticals Ltd,445,441,4
+BestoChem Formulations  India  Ltd,3,0,3
+Parker Robinson Pvt  Ltd,3,0,3
+Apex Laboratories Pvt Ltd,45,42,3
+Macleods Pharmaceuticals Pvt Ltd,319,316,3
+Lupin Ltd,435,432,3
+RPG Life Sciences Ltd,43,41,2
+Systopic Laboratories Pvt Ltd,133,131,2
+Rockmed Pharma Pvt. Ltd.,30,28,2
+Ajanta Pharma Ltd,108,106,2
+MDC Pharmaceuticals  Pvt Ltd,2,0,2
+Dermo Care Laboratories,12,10,2
+Orn Remedies Pvt  Ltd,2,0,2
+Alkem Laboratories Ltd,327,325,2
+Mohrish Pharmaceuticals,21,19,2
+Janssen Pharmaceuticals,29,28,1
+Pulse Pharmaceuticals,12,11,1
+Dolvis Bio Pharma Pvt Ltd,6,5,1
+Panbross Pharmaceuticals Pvt  Ltd,1,0,1
+Solvate Laboratries Pvt Ltd,10,9,1
+Ind Swift Laboratories Ltd,10,9,1
+Troikaa Pharmaceuticals Ltd,28,27,1
+Mitoch Pharma Pvt Ltd,8,7,1
+West-Coast Pharmaceutical Works Ltd,8,7,1
+Wanbury Ltd,7,6,1
+Suncare Formulations Pvt Ltd,7,6,1
+Sun Pharmaceutical Industries Ltd,820,819,1
+Zee Laboratories,6,5,1
+Paras Impex ,1,0,1
+Deon Healthcare,2,1,1
+Minova Life Sciences Pvt Ltd,2,1,1
+Nexacare Lifesciences Pvt Ltd,2,1,1
+Avirav Sciences Pvt Ltd,2,1,1
+Smithways Oncology Pvt Ltd,2,1,1
+Kivonyx Healthcare,2,1,1
+Shilpex Pharmysis,2,1,1
+Oxania Healthcare Pvt Ltd,2,1,1
+Celsius Healthcare Pvt Ltd,6,5,1
+Krishna Life Sciences,2,1,1
+Rivan Pharma,3,2,1
+Syncom Formulations  I  Limited,1,0,1
+Jenburkt Pharmaceuticals Ltd,37,36,1
+UCB India Pvt Ltd,4,3,1
+Yaher Pharma,4,3,1
+Curagen Biological   Pharmaceuticals,1,0,1
+East West Pharma,33,32,1
+Mova Pharmaceutical Pvt Ltd,6,5,1
+Fourrts India Laboratories Pvt Ltd,40,39,1
+Eris Lifesciences Ltd,137,136,1
+Aristo Pharmaceuticals Pvt Ltd,225,224,1
+Oaknet Healthcare Pvt Ltd,50,49,1
+La Renon Healthcare Pvt Ltd,98,97,1
+Serum Institute Of India Ltd,43,42,1
+Emcure Pharmaceuticals Ltd,124,123,1
+Hegde and Hegde Pharmaceutical LLP,70,69,1
+Glaxo SmithKline Pharmaceuticals Ltd,69,68,1
+Ipca Laboratories Ltd,235,234,1
+Sanofi India Ltd,66,65,1
+Zydus Cadila,327,326,1
+Pfizer Ltd,69,68,1
+Glenmark Pharmaceuticals Ltd,209,208,1
+Alembic Pharmaceuticals Ltd,167,166,1
+Leeford Healthcare Ltd,163,162,1
+Mankind Pharma Ltd,337,336,1
+Franco-Indian Pharmaceuticals Pvt Ltd,55,54,1
+Clementia Pharmaceuticals Pvt Ltd,1,1,0
+Caryota Life Sciences India Pvt. Ltd.,1,1,0
+Zhenpi Life Sciences Pvt Ltd,1,1,0
+Arlak Biotech Pvt Ltd,1,1,0
+Aurolab,1,1,0
+Zenvita Healthcare Pvt Ltd,1,1,0
+New Medicon Pharma Labs Pvt Ltd,1,1,0
+Care Organics Ltd.,1,1,0
+Bio-Zenesis Healthcare,1,1,0
+Syndicate Life Sciences Pvt Ltd,1,1,0
+Colinz Laboratories Ltd,1,1,0
+Arrient Healthcare Pvt Ltd,1,1,0
+Healing Pharma India Pvt Ltd,1,1,0
+Telic Pharma,1,1,0
+Aprazer Healthcare Pvt Ltd,1,1,0
+Bell Pharma Pvt Ltd,1,1,0
+Medsea Healthcare Pvt Ltd,1,1,0
+Prochem Pharmaceuticals Pvt Ltd,1,1,0
+Everen Healthcare,1,1,0
+Estragen Pharma,1,1,0
+Berry & Herbs Pharma Pvt Ltd,1,1,0
+Pure Science Biotech,1,1,0
+Kinesis Pharmaceuticals Pvt Ltd,1,1,0
+Ultichem Pharmaceuticals Pvt Ltd,1,1,0
+Zelleven Healthcare Pvt Ltd,1,1,0
+RSL Bioscience Pvt Ltd,1,1,0
+Richfaith Pharmaceuticals,1,1,0
+Marc Laboratories Pvt Ltd,1,1,0
+Synchem Lab,1,1,0
+Intra Labs India Pvt Ltd,1,1,0
+Gold Line,1,1,0
+Vibrant Healthcare Pvt Ltd,1,1,0
+Texas Pharmaceuticals,1,1,0
+Taj Pharma India Ltd,1,1,0
+Malvern Pharma,1,1,0
+Vkan healthcare,1,1,0
+Torway Pharmacia Pvt Ltd,1,1,0
+Kare Health Specialities Pvt Ltd,1,1,0
+Synovia Life Sciences Pvt Ltd,1,1,0
+Mars Therapeutics & Chemicals Ltd,1,1,0
+Anglo-French Drugs & Industries Ltd,1,1,0
+Wisteria Healthcare LLP,1,1,0
+Drakt Pharmaceutical Pvt Ltd,1,1,0
+GENZYME,1,1,0
+Synthergen Therapeutics Pvt Ltd,1,1,0
+Paras Pharmaceuticals Ltd,1,1,0
+Prosper Channel Lifescience India Pvt Ltd,1,1,0
+Indian Immunologicals Ltd,1,1,0
+Dermarex HealthCare India Pvt. Ltd.,1,1,0
+Daylon Healthcare,1,1,0
+Blisson Mediplus Pvt Ltd,1,1,0
+Salud Care India Pvt Ltd,1,1,0
+Synovion Laboratories Pvt Ltd,1,1,0
+Denis Chem Lab Ltd,1,1,0
+Enrico Pharmaceuticals,1,1,0
+Medpro Biotech,1,1,0
+Astech Pharma Pvt Ltd,1,1,0
+Gms Biomax Medicare Pvt Ltd,1,1,0
+Wellicia Pharmaceuticals Pvt Ltd,1,1,0
+Anhox Healthcare Pvt Ltd,1,1,0
+URSA Pharm,1,1,0
+Biomiicron Pharmaceuticals,1,1,0
+Viwacure Healthcare Pvt Ltd,1,1,0
+Universal NutriScience,1,1,0
+Bayer Pharmaceuticals Pvt Ltd,1,1,0
+Santis Pharmaceuticals Private Limited,1,1,0
+Bionucleus Pharmaceuticals Pvt Ltd,1,1,0
+Ardent Life Sciences Pvt Ltd,1,1,0
+MidasCare Pharmaceuticals Pvt Ltd,1,1,0
+Pretium Pharmaceuticals,1,1,0
+Zelleven Pharma Pvt Ltd,1,1,0
+Vitabolik Pharma,1,1,0
+Heveren Healthcare Pvt Ltd,1,1,0
+Austrak Pvt Ltd,1,1,0
+Ashes Life Sciences,1,1,0
+Leo Pharmaceuticals,1,1,0
+Integra Life Sciences Pvt Ltd,1,1,0
+Magnachem Pharmaceuticals Pvt Ltd,1,1,0
+Tidal Healthcare Pvt Ltd,1,1,0
+Altavista Life Sciences Pvt Ltd,1,1,0
+Shelon Pharmalabs Private Limited,1,1,0
+Optimal Pharma tech,1,1,0
+Bio Vitamins,2,2,0
+Pacific Biotech,1,1,0
+Nithyasha Healthcare Pvt Ltd,2,2,0
+Fibrica Healthcare Pvt Ltd,2,2,0
+Cipla Health Ltd,2,2,0
+Nidus Pharma Pvt Ltd,2,2,0
+Alvid-Indo Corporation,1,1,0
+Sigman Wellness,1,1,0
+Medlius Pharma Pvt. Limited,1,1,0
+Arkson Pharmaceuticals,1,1,0
+Boots Lifesciences Ltd,1,1,0
+Shield Health Care Pvt Ltd,1,1,0
+Biomed Pharmaceuticals,1,1,0
+Astra Labs,1,1,0
+Ethicare Pharma,1,1,0
+Pharmasynth Formulations Ltd,1,1,0
+Mezzone Remedies Pvt Ltd,1,1,0
+Tricos Dermatologics Pvt Ltd,1,1,0
+Elcliff Formulations Pvt Ltd,2,2,0
+Misae Lifesciences Pvt Ltd,1,1,0
+Paviour Pharmaceuticals Pvt Ltd,2,2,0
+Surecare Pharma Pvt Ltd,2,2,0
+Ergos Life Sciences,2,2,0
+Praise Pharma,2,2,0
+Venus Remedies Ltd,2,2,0
+Vinder Pharma,2,2,0
+Mcastro Pharma,2,2,0
+Kaizen Pharmaceuticals Pvt Ltd,2,2,0
+Unimac Pharmaceuticals Pvt Ltd,2,2,0
+Austro Labs,2,2,0
+Bion Therapeutics India Pvt Ltd,2,2,0
+Santiago Lifesciences Pvt Ltd,2,2,0
+Ingram Biosciences Pvt Ltd,2,2,0
+Algen Healthcare Limited,2,2,0
+Avis Lifecare Pvt Ltd,2,2,0
+Dukes Lab,2,2,0
+ADN Life Sciences,2,2,0
+Albia Biocare,1,1,0
+Celera Healthcare Pvt. Ltd.,2,2,0
+Fluense Pharmaceutical,1,1,0
+Excella Life Sciences Pvt Ltd,1,1,0
+Winsome Laboratories Pvt Ltd,1,1,0
+Mitis Biomedics Ltd,1,1,0
+Mac Millon Pharmaceuticals Pvt Ltd,1,1,0
+Concord Drugs Ltd,1,1,0
+Alna Biotech Pvt Ltd,1,1,0
+Aeobury Healthcare Pvt Ltd,1,1,0
+Genetic Pharma,1,1,0
+Novelty Healthshine Pvt Ltd,1,1,0
+Glorious Biotech,1,1,0
+Siesta Pharmaceuticals,1,1,0
+GH Vision Care Life Science,1,1,0
+Strimed Pharmaceuticals Pvt Ltd,1,1,0
+Rostrumed Biotech Pvt Ltd,1,1,0
+OSR Pharmaceuticals Pvt Ltd,1,1,0
+Scorleon Pharma,1,1,0
+PlasmaGen Biosciences Pvt Ltd,1,1,0
+Aretaeus Pharmaceuticals,1,1,0
+S H Pharmaceuticals Ltd,1,1,0
+Winsome Bioceuticals,1,1,0
+Matteo Healthcare Pvt Ltd,1,1,0
+Daksh Pharma Pvt Ltd,1,1,0
+Appasamy Ocular Device Pvt Ltd,1,1,0
+Knox Life Sciences Pvt Ltd,1,1,0
+Senechio Pharma Pvt Ltd,1,1,0
+Bellavita Healthcare Pvt Ltd,1,1,0
+Gary Pharmaceuticals Pvt Ltd,1,1,0
+Teknovations Life Science,1,1,0
+Nicholas Healthcare Limited,1,1,0
+Agn Healthcare,1,1,0
+AGIO Pharmaceuticals Ltd,1,1,0
+Apotex Pharmachem India Pvt Ltd,1,1,0
+Jenome Biophar Pvt Ltd,1,1,0
+Auftritt Healthcare Pvt Ltd,1,1,0
+Linus Life Sciences Pvt Ltd,1,1,0
+Ethicare Remedies,1,1,0
+Bioplasma Immunological Research Pvt Ltd,1,1,0
+Orison Pharma International,1,1,0
+Elsker lifescience Pvt. Ltd.,1,1,0
+Adley Formulations,1,1,0
+KPH Cosmos Pvt Ltd,1,1,0
+Flaron Healthcare Pvt Ltd,1,1,0
+Triton Healthcare Pvt Ltd,1,1,0
+Dr Willmar Schwabe India Pvt Ltd,1,1,0
+Theia Healthcare,1,1,0
+Bioas Medico Pvt Ltd,1,1,0
+Xena Coronus Health Care Pvt Ltd,1,1,0
+Eucare Pharmaceuticals Pvt Ltd,1,1,0
+Narvs Pharma,1,1,0
+Uvb Healthcare Pvt Ltd,1,1,0
+Coxswain Healthcare,1,1,0
+Adonis Phytoceuticals Pvt Ltd,1,1,0
+Craza Lifesciences Pvt Ltd,1,1,0
+Holy Lifesciences,1,1,0
+Omega Remedies Pvt Ltd,1,1,0
+Ampra Pharmaceuticals,1,1,0
+Skinska Pharmaceutica Pvt Ltd,1,1,0
+Elis Pharmaceuticals India Pvt Ltd,1,1,0
+Signature Phytochemical Industries,1,1,0
+Medileb Speaciality Laboratories Pvt Ltd,1,1,0
+Calibar Pharmaceuticals,1,1,0
+Formahealth,1,1,0
+Mascot Health Series Pvt Ltd,1,1,0
+Schulke India Private Limited,1,1,0
+Edura Pharmaceuticals Pvt Ltd,1,1,0
+Bellissa Pharmaceuticals,1,1,0
+Bajaj Pharmaceutical,1,1,0
+Nexeum Pharmaceuticals,1,1,0
+Baxalta Biosciences India Private Limited,1,1,0
+P R G Pharma Pvt Ltd,1,1,0
+Deevens Pharma,1,1,0
+Universal Pharma,1,1,0
+Psycormedies,1,1,0
+Dupen Laboratories Pvt Ltd,1,1,0
+Goddres Pharmaceuticals Pvt Ltd,1,1,0
+Hicare Pharma,1,1,0
+Bio Swizz Pharmaceuticals,1,1,0
+Woakes Pharma,1,1,0
+Nutratec Pharmaceuticals,1,1,0
+Grevis Pharmaceuticals Pvt Ltd,1,1,0
+Mil Laboratories Pvt Ltd,1,1,0
+Unicure India Pvt Ltd,1,1,0
+Skin First Cosmeceutical,1,1,0
+Focaz Medipharma,1,1,0
+Lynderma Pharmaceuticals,1,1,0
+Kruger Pharmaceuticals Pvt Ltd,1,1,0
+Era Pharmaceuticals,1,1,0
+Depsons Healthcare,1,1,0
+Winston Pharmaceuticals Ltd,1,1,0
+Ochoa Laboratories Ltd,1,1,0
+Novazen Pharmaceuticals,1,1,0
+Beulah Biomedics Ltd,1,1,0
+Care Pride Pharma,1,1,0
+Surelife Remedies Pvt Ltd,1,1,0
+Dew Drops Lab,1,1,0
+Mediwin Pharmaceuticals,1,1,0
+Micro 2 Mega Healthcare Pvt Ltd,1,1,0
+Onerous Pharma,1,1,0
+Vbrace International,1,1,0
+Leo Life Science Pvt Ltd,1,1,0
+Astraea Life Sciences Pvt Ltd,1,1,0
+LifeSurge BioSciences Pvt Ltd,1,1,0
+Medicom International Eyetech Pvt Ltd,1,1,0
+Century Life Science,1,1,0
+Real Care Life Sciences,1,1,0
+Laures Pharmaceuticals Pvt Ltd,1,1,0
+Zodley Pharmaceuticals Pvt Ltd,1,1,0
+Hnf Care Pvt Ltd,1,1,0
+Mibsons Pharmaceutical Pvt Ltd,1,1,0
+AS Lifesciences,1,1,0
+Nukind Healthcare Pvt Ltd,1,1,0
+ADZO Lifesciences Pvt Ltd,1,1,0
+Amideep Pharmaceuticals,1,1,0
+Olcare Laboratories,1,1,0
+Galenus Pharma Pvt Ltd,1,1,0
+AAA Pharma Trade Pvt Ltd,1,1,0
+Asvins Lifecare,1,1,0
+Zen Labs India,1,1,0
+Doff Biotech Pvt Ltd,1,1,0
+Romas Remedies,1,1,0
+Meracus Pharmaceuticals,1,1,0
+Strivo Pharma Pvt Ltd,1,1,0
+Medigenesis Pharma Pvt Ltd,1,1,0
+Wilburt Remedies Pvt Ltd,1,1,0
+Radix Pharmaceuticals,1,1,0
+Novo Medi Sciences Pvt Ltd,1,1,0
+Avilius Neutracare,1,1,0
+Procter & Gamble Hygiene and Health Care Ltd,1,1,0
+Biotic Healthcare,1,1,0
+Uniprogen Biotech Pvt Ltd,1,1,0
+Softdeal Pharmaceutical Private Limited,1,1,0
+Indi Pharma,1,1,0
+KC Laboratories,1,1,0
+KRP Pharma,1,1,0
+Sowilo India Pharmaceuticals Pvt Ltd,1,1,0
+Dycine Pharmaceuticals Ltd,1,1,0
+GBK Healthcare,1,1,0
+Protech Biosystems,1,1,0
+Matias Healthcare Pvt Ltd,1,1,0
+Kinedex Healthcare Pvt Ltd,2,2,0
+Andro Lifecare Pharma,1,1,0
+Aceon Pharma,1,1,0
+Dr Cure Pharmaceuticals India Pvt Ltd,1,1,0
+Oriva Lifesciences Pvt Ltd,1,1,0
+Oziel Pharmaceuticals Pvt Ltd,1,1,0
+Assure Lifescience Pvt Ltd,1,1,0
+Eraas International,1,1,0
+Ultra Biotech Formulations,1,1,0
+Adroit Biomed Ltd,1,1,0
+Genix Lifescience Pvt Ltd,1,1,0
+Synergy Diagnostics Pvt Ltd,1,1,0
+BDR Pharmaceuticals Internationals Pvt,1,1,0
+Ultimate Healthcare,1,1,0
+Maestro Healthcare Pvt Ltd,1,1,0
+Sanogen Pharma Private Limited,1,1,0
+Plasoron biotech,1,1,0
+Lividus Pharmaceuticals Pvt Ltd,1,1,0
+Flagship Biotech International,1,1,0
+Truworth Healthcare,1,1,0
+Mavin Pharmaceuticals,1,1,0
+Bio-Med Pvt Ltd,1,1,0
+Texas Biotech,1,1,0
+SG Lifecare Pvt Ltd,1,1,0
+Seraph Life Sciences Pvt Ltd,1,1,0
+Quepreon Biologicals Pvt Ltd,1,1,0
+Doeshealth Systems Private Limited,1,1,0
+Srigen Pharmaceuticals,1,1,0
+Renauxe Pharma India Pvt Ltd,1,1,0
+Dermcure's Pharma,1,1,0
+Genspec Lifesciences,1,1,0
+Asarva Lifescience Pvt Ltd,1,1,0
+Hindustan Pharmaceuticals,1,1,0
+Sonika Life Sciences Ltd,1,1,0
+Blisson Medica Private Limited,1,1,0
+Eright Healthcare,1,1,0
+Shilpa Medicare Ltd,1,1,0
+Medivision Pharm,1,1,0
+Frankfurt Pharma Pvt Ltd,1,1,0
+Mayflower India,1,1,0
+Intel Pharmaceuticals,1,1,0
+Baxton Pharmacia,1,1,0
+Cure Quick Pharmaceuticals,1,1,0
+La Med India,1,1,0
+Vaishali Pharma Ltd,1,1,0
+Alive Pharmaceutical Pvt Ltd,1,1,0
+Fhm Pharma Pvt Ltd,1,1,0
+Viento Healthcare,1,1,0
+Merit Organics Ltd,1,1,0
+Wardex Pharmaceutical Pvt. Ltd.,1,1,0
+Bluemed Pharma Pvt Ltd,1,1,0
+Gamete Pharma Pvt Ltd,1,1,0
+Synergy Pharma Formulations India Pvt Ltd,1,1,0
+Jupiter Pharmaceutical Ltd,1,1,0
+V R Med Healthcare,1,1,0
+Dolphin Laboratories Ltd,1,1,0
+Butson Bioscience,1,1,0
+Lundbeck India Pvt Ltd,1,1,0
+Rowez Life Sciences Pvt. Ltd.,1,1,0
+GlaxoSmithKline Consumer Healthcare,1,1,0
+Arjan Biotech,1,1,0
+Duckbill Drugs Pvt Ltd,1,1,0
+General Pharmaceuticals Pvt Ltd,1,1,0
+Dr. Morepen Limited,1,1,0
+MSN Laboratories Ltd,1,1,0
+Floreat Medica Pvt Ltd,1,1,0
+Zytras Life Sciences,1,1,0
+Kepler Health Care,1,1,0
+Ektek Pharma,1,1,0
+Aarti Life Science,1,1,0
+La-med Healthcare Pvt Ltd,1,1,0
+Regaliz India Ltd,1,1,0
+Alliance Remedies,1,1,0
+Kuresys Labs,1,1,0
+Mediste Pharmaceuticals Pvt Ltd,1,1,0
+Bionova Lifesciences,1,1,0
+Domagk Smith Labs Pvt Ltd,1,1,0
+Rowan Bioceuticals Pvt Ltd,1,1,0
+Lark Laboratories Ltd,1,1,0
+Disecure Pharma,2,2,0
+Organon (India) Ltd,2,2,0
+His Eyeness Ophthalmics Pvt Ltd,2,2,0
+Raymed Pharmaceuticals Ltd,9,9,0
+Primus Remedies Pvt Ltd,10,10,0
+Prism Life Sciences Ltd,10,10,0
+Fulford India Ltd,9,9,0
+Pharmed Ltd,9,9,0
+Delcure Life Sciences,9,9,0
+Brainwave Healthcare Pvt Ltd,9,9,0
+Optho Life Sciences Pvt Ltd,9,9,0
+Maverick Pharma Pvt Ltd,9,9,0
+Apple Therapeutics Pvt Ltd,9,9,0
+Maxamus Pharma Pvt Ltd,10,10,0
+Amwill Healthcare,9,9,0
+Aareen Healthcare Pvt Ltd,9,9,0
+Khandelwal Laboratories Pvt Ltd,9,9,0
+United Biotech Pvt Ltd,9,9,0
+Strassenburg Pharmaceuticals.Ltd,9,9,0
+Grandcure Healthcare Pvt Ltd,8,8,0
+Foregen Healthcare Ltd,8,8,0
+HBC Lifesciences Pvt Ltd,8,8,0
+Overseas Healthcare Pvt Ltd,10,10,0
+Bharat Biotech,10,10,0
+Sparsh Remedies Pvt Ltd,8,8,0
+Syntho Pharmaceuticals Pvt Ltd,11,11,0
+Elder Pharmaceuticals Ltd,12,12,0
+Pharmtak Ophtalmics India Pvt Ltd,12,12,0
+Sentiss Pharma,12,12,0
+Aprica Pharmaceuticals Pvt Ltd,12,12,0
+Eisai Pharmaceuticals India Pvt Ltd,12,12,0
+Morepen Laboratories Ltd,12,12,0
+Eskon Pharma,11,11,0
+Alcon Laboratories,11,11,0
+Deys Medical,11,11,0
+Anthem Biopharma,10,10,0
+Modi Mundi Pharma Pvt Ltd,11,11,0
+Unimarck Pharma India Ltd,11,11,0
+Dermakare Pharmaceuticals Pvt Ltd,11,11,0
+Dios Lifesciences Pvt Ltd,11,11,0
+East India Pharmaceutical Works Ltd,11,11,0
+Galderma India Pvt Ltd,10,10,0
+Serdia Pharmaceuticals India Pvt Ltd,10,10,0
+Saffron Therapeutics Pvt Ltd,10,10,0
+Icpa Health Products Ltd,8,8,0
+Quince Lifesciences Pvt Ltd,8,8,0
+Eskag Pharma Pvt Ltd,5,5,0
+Precia Pharma,6,6,0
+Zivira Labs Pvt Ltd,6,6,0
+Stedman Pharmaceuticals Pvt Ltd,6,6,0
+Nexgen Rx Life Science Pvt Ltd,6,6,0
+Aglowmed Limited,6,6,0
+Karnataka Antibiotics & Pharmaceuticals Ltd,6,6,0
+Alchem Phytoceuticals Ltd,6,6,0
+Mercury Laboratories Ltd,6,6,0
+Sanzyme Ltd,6,6,0
+Akesiss Pharma Pvt Ltd,6,6,0
+Neomedix Healthcare India Private Limited,6,6,0
+Prosaic Pharmaceuticals Pvt Ltd,6,6,0
+Forman Medics Pvt Ltd,5,5,0
+Winmark Pharmaceuticals Pvt Ltd,5,5,0
+Makers Laboratories Ltd,5,5,0
+Concept Pharmaceuticals Ltd,2,2,0
+Athens Labs Ltd,5,5,0
+Kee Pharma,5,5,0
+Dabur India Ltd,5,5,0
+Health N U Therapeutics Pvt Ltd,6,6,0
+CNX Healthcare Pvt Ltd,6,6,0
+Alteus Biogenics Pvt Ltd,8,8,0
+Fusion Healthcare Pvt Ltd,7,7,0
+Group Pharmaceuticals Ltd,8,8,0
+C M R Life Sciences,8,8,0
+Lekar Pharma Ltd,8,8,0
+Optho Pharma Pvt Ltd,8,8,0
+Dermajoint India,7,7,0
+Septalyst Lifesciences Pvt.Ltd.,7,7,0
+Maneesh Pharmaceuticals Ltd,7,7,0
+Encore Pharmaceuticals Inc.,7,7,0
+AN Pharmaceuticals Pvt Ltd,7,7,0
+Innovcare Lifesciences Pvt Ltd,6,6,0
+Shine Pharmaceuticals Ltd,7,7,0
+DWD Pharmaceuticals Ltd,7,7,0
+Delvin Formulations Pvt Ltd,7,7,0
+Sanstuti Pharmaceuticals Pvt Ltd,7,7,0
+Medopharm,7,7,0
+Swast Aushadhi Seva Generic Medicine Store,7,7,0
+Torque Pharmaceuticals Pvt Ltd,7,7,0
+Juggat Pharma,7,7,0
+Tablets India Limited,12,12,0
+Indiabulls pharmaceutical ltd,13,13,0
+Psychotropics India Ltd,13,13,0
+Biochem Pharmaceutical Industries,31,31,0
+Koye Pharmaceuticals Pvt ltd,37,37,0
+Unison Pharmaceuticals Pvt Ltd,35,35,0
+A. Menarini India Pvt Ltd,34,34,0
+Panacea Biotec Ltd,33,33,0
+Bharat Serums & Vaccines Ltd,33,33,0
+Linux Laboratories,32,32,0
+Centaur Pharmaceuticals Pvt Ltd,32,32,0
+Glowderma Labs Pvt Ltd,31,31,0
+Novo Nordisk India Pvt Ltd,31,31,0
+Novartis India Ltd,41,41,0
+Entod Pharmaceuticals Ltd,31,31,0
+Zydus Healthcare Limited,30,30,0
+Knoll Pharmaceuticals Ltd,30,30,0
+Tas Med India Pvt Ltd,29,29,0
+Bayer Zydus Pharma Pvt Ltd,29,29,0
+Samarth Life Sciences Pvt Ltd,29,29,0
+Rapross Pharmaceuticals Pvt Ltd,29,29,0
+Med Manor Organics Pvt Ltd,27,27,0
+Wockhardt Ltd,40,40,0
+MSN Laboratories,44,44,0
+Boehringer Ingelheim,13,13,0
+Medley Pharmaceuticals,76,76,0
+Abbott,279,279,0
+Micro Labs Ltd,276,276,0
+Dr Reddy's Laboratories Ltd,266,266,0
+USV Ltd,124,124,0
+FDC Ltd,115,115,0
+Zuventus Healthcare Ltd,104,104,0
+Cadila Pharmaceuticals Ltd,96,96,0
+Corona Remedies Pvt Ltd,77,77,0
+Icon Life Sciences,71,71,0
+J B Chemicals and Pharmaceuticals Ltd,44,44,0
+Canixa Life Sciences Pvt,68,68,0
+Hetero Drugs Ltd,59,59,0
+Indoco Remedies Ltd,57,57,0
+Blue Cross Laboratories Ltd,55,55,0
+Wallace Pharmaceuticals Pvt Ltd,54,54,0
+Akumentis Healthcare Ltd,52,52,0
+KLM Laboratories Pvt Ltd,50,50,0
+Biocon,44,44,0
+Win-Medicare Pvt Ltd,26,26,0
+Allergan India Pvt Ltd,23,23,0
+Lloyd Healthcare Pvt Ltd,23,23,0
+Salve Pharmaceuticals Pvt Ltd,14,14,0
+Bal Pharma Ltd,16,16,0
+Ronyd Healthcare Pvt Ltd,16,16,0
+Lincoln Pharmaceuticals Ltd,15,15,0
+Ethinext Pharma,15,15,0
+Yash Pharma Laboratories Pvt Ltd,15,15,0
+TTK Healthcare Ltd,15,15,0
+Jubilant Life Sciences,15,15,0
+Ordain Health Care Global Pvt Ltd,15,15,0
+MSD Pharmaceuticals Pvt Ltd,14,14,0
+Natco Pharma Ltd,23,23,0
+Kivi Labs Ltd,14,14,0
+Dr. Johns Laboratories Pvt Ltd,14,14,0
+Jagsonpal Pharmaceuticals Ltd,13,13,0
+Seagull Pharmaceutical Pvt Ltd,13,13,0
+Mylan Pharmaceuticals Pvt Ltd - A Viatris Company,13,13,0
+Indchemie Health Specialities Pvt Ltd,13,13,0
+NuLife Pharmaceuticals,13,13,0
+Steadfast Medishield Pvt Ltd,13,13,0
+Integrace Pvt Ltd,16,16,0
+Albert David Ltd,17,17,0
+Palsons Derma,17,17,0
+Eli Lilly and Company India Pvt Ltd,18,18,0
+Neon Laboratories Ltd,23,23,0
+Merck Ltd,22,22,0
+Arinna Lifescience Pvt Ltd,22,22,0
+Sunways India Pvt Ltd,22,22,0
+AstraZeneca,21,21,0
+Nri Vision Care India Limited,21,21,0
+Alniche Life Sciences Pvt Ltd,21,21,0
+Shreya Life Sciences Pvt Ltd,21,21,0
+Walter Bushnell,20,20,0
+Brinton Pharmaceuticals Pvt Ltd,20,20,0
+Ozone Pharmaceuticals Ltd,20,20,0
+Meyer Organics Pvt Ltd,19,19,0
+Ferring Pharmaceuticals,19,19,0
+Obsurge Biotech Ltd,18,18,0
+La Pristine Bioceuticals Pvt Ltd,18,18,0
+Geno Pharmaceuticals Ltd,18,18,0
+Sapient Laboratories Pvt Ltd,18,18,0
+Curatio Healthcare India Pvt Ltd,5,5,0
+Syscutis Healthcare,5,5,0
+Emcee Pharmaceuticals Pvt Ltd,5,5,0
+Mebio Labs Pvt Ltd,2,2,0
+Santen India Pvt Ltd,2,2,0
+Dales Laboratories Pvt Ltd,2,2,0
+Hn Cure Pharma Pvt Ltd,2,2,0
+Shrrishti Health Care Products Pvt Ltd,2,2,0
+Nexgen Pharma,2,2,0
+Akcent Healthcare,2,2,0
+Laborate Pharmaceuticals India Ltd,2,2,0
+Kriven Health Solutions,2,2,0
+Healthyways Pharmaceuticals pvt Ltd,2,2,0
+VIVO Life Science,2,2,0
+Sandika Pharmaceuticals Pvt Ltd,2,2,0
+Dollar,2,2,0
+Reliance Formulation Pvt Ltd,2,2,0
+Sarvagunaushdhi Pvt Ltd,2,2,0
+Tycoon Pharmaceuticals Pvt Ltd,2,2,0
+Gracious Pharmaceuticals,2,2,0
+Dermont Pharmaceuticals Pvt Ltd,2,2,0
+Pharmanova Specialties Pvt Ltd,2,2,0
+Klar Sehen Pvt Ltd,2,2,0
+Gufic Bioscience Ltd,2,2,0
+Druto Laboratories,3,3,0
+Senses Pharmaceuticals Ltd,3,3,0
+SKN Organics,3,3,0
+Stadmed Pvt Ltd,3,3,0
+Pharmanova India Drugs Pvt Ltd,5,5,0
+Medsol India Overseas Pvt Ltd,3,3,0
+Global Dent Aids Pvt Ltd,3,3,0
+Lakshya Life Sciences,3,3,0
+Snig Pharmaceuticals Pvt Ltd,3,3,0
+Lifeline Remedies India Pvt Ltd,3,3,0
+Universal Twin Labs,3,3,0
+Akognos Life Sciences,2,2,0
+Unichem Laboratories Ltd,3,3,0
+Zeelab Pharmacy Pvt Ltd,3,3,0
+Omenta Pharma Pvt Ltd,3,3,0
+Intermed Pharma Pvt Ltd,3,3,0
+Zeno Healthcare,2,2,0
+Astellas Pharma Inc,2,2,0
+Endocard India Pvt Ltd,2,2,0
+Resilient Cosmecueticals Pvt Ltd,2,2,0
+Zyphar's Pharmaceuticals Pvt Ltd,2,2,0
+Ikon Remedies Pvt Ltd,2,2,0
+Concord Biotech Ltd,2,2,0
+Caplet India Pvt Ltd,2,2,0
+McW Healthcare,2,2,0
+Elan Pharma India Pvt Ltd,2,2,0
+Eris Oaknet Healthcare Pvt Ltd,2,2,0
+Adalbert Healthcare Pvt Ltd,2,2,0
+Lavue Pharmaceuticals,2,2,0
+Syswin Pharmaceuticals Pvt Ltd,2,2,0
+Curador Healthcare Pvt Ltd,2,2,0
+Mediart Lifesciences Pvt Ltd,2,2,0
+Alaxia Healthcare,2,2,0
+Stanwell Lifesciences Pvt Ltd,2,2,0
+German Remedies,2,2,0
+Viilbery Healthcare Pvt Ltd,2,2,0
+Velite Pharmaceuticals,2,2,0
+Azkka Pharmaceuticals Pvt Ltd,2,2,0
+Pharmatak Opthalmics Pvt Ltd,2,2,0
+Waterley Pharmaceuticals Pvt Ltd,2,2,0
+Zunison Healthcare,2,2,0
+Cnscure India Pvt Ltd,2,2,0
+Invision Medi Sciences Pvt Ltd,2,2,0
+Choroid Laboratories,2,2,0
+Besins Healthcare India Pvt Ltd,2,2,0
+Indiana Opthalmics,2,2,0
+Vhb Life Sciences Inc,2,2,0
+Panzer Pharmaceuticals Pvt Ltd,2,2,0
+Biomedica International,2,2,0
+HBC Dermiza Healthcare Pvt Ltd,2,2,0
+Hetero Healthcare Limited,2,2,0
+Eyekare Kilitch Limited,2,2,0
+Resolute Healthcare,2,2,0
+Sundyota Numandis Probioceuticals Pvt Ltd,2,2,0
+Mapra Laboratories Pvt Ltd,2,2,0
+Roussel Laboratories Pvt Ltd,2,2,0
+Lyra Laboratories Pvt Ltd,2,2,0
+Nemus Pharmaceuticals Pvt Ltd,2,2,0
+Solarium Pharmaceuticals,2,2,0
+Opticarma India SMC Pvt Ltd,2,2,0
+Sterkem Pharma Pvt Ltd,2,2,0
+Parnasa Mediworld Pvt Ltd,2,2,0
+U & V Cancure Pvt. Ltd.,2,2,0
+Walron Healthcare Pvt Ltd,3,3,0
+Vaxova Drugs Pvt Ltd,3,3,0
+Cadell Healthcare Pvt Ltd,3,3,0
+MMC Healthcare Ltd,4,4,0
+Three Dots Lifescience,4,4,0
+HiGlance Laboratories,4,4,0
+Vivid Biotek Pvt Ltd,4,4,0
+Veritaz Healthcare Ltd,4,4,0
+Galpha Laboratories Ltd,4,4,0
+Strides shasun Ltd,4,4,0
+Jarun Pharmaceuticals,4,4,0
+Cutis Dermacare,4,4,0
+Mac Laboratories Ltd,4,4,0
+Mesova Pharmaceuticals,4,4,0
+Cadomed Pharmaceuticals Pvt Ltd,4,4,0
+Meridian Enterprises Pvt Ltd,4,4,0
+Organic Laboratories,4,4,0
+Bioceutics Inc,4,4,0
+Luxica Pharma Inc.,3,3,0
+Iceberg Healthcare Pvt Ltd,4,4,0
+Themis Medicare Ltd,4,4,0
+Wings Biotech Ltd,4,4,0
+Acme Generics LLP,4,4,0
+Leben Life Sciences Pvt Ltd,4,4,0
+SAF Fermion Ltd,4,4,0
+Comed Chemicals Ltd,5,5,0
+Aksigen Hospital Care,5,5,0
+Tidal Laboratories Pvt Ltd,5,5,0
+Inga Laboratories Pvt Ltd,5,5,0
+D D Pharmaceuticals,5,5,0
+Aspen Pharma,5,5,0
+Galcare Pharmaceutical Pvt Ltd,5,5,0
+Cachet Pharmaceuticals Pvt Ltd,5,5,0
+Biological E Ltd,5,5,0
+JNTL Consumer Health (India) Pvt. Ltd.,5,5,0
+Scinticaa Pharma,4,4,0
+ZDL(Zodiacal) Pharmaceutics Pvt.Ltd,5,5,0
+Nanz Med Science Pharma Ltd,5,5,0
+Johnson & Johnson Ltd,5,5,0
+TBG pharma ltd,4,4,0
+Sol Derma Pharmaceuiticals Pvt Ltd,4,4,0
+Signova Pharma Pvt Ltd,4,4,0
+Optica Pharmaceuticals Pvt Ltd,4,4,0
+Jupiter Biolabs Pvt Ltd,4,4,0
+Somatico Pharmacal Pvt Ltd,4,4,0
+Biokindle Lifesciences Pvt Ltd,4,4,0
+Adonis Laboratories Pvt Ltd,4,4,0
+Rely on Pharmaceuticals,3,3,0
+Pure and Cure Healthcare Private Limited,3,3,0
+Vanprom Lifesciences Pvt Ltd,3,3,0
+Saphnix Life Sciences,3,3,0
+Megha Healthcare Pvt Ltd,3,3,0
+Jay Ell Healthcare Pvt. Ltd,3,3,0
+Vyonics Health Care Pvt Ltd,3,3,0
+Aureate Healthcare Pvt Ltd,3,3,0
+Galaxy Biotech,3,3,0
+Anthus Pharmaceuticals Pvt Ltd,3,3,0
+Radicool Pharmaceutical Pvt Ltd,3,3,0
+Raptakos Brett & Co Ltd,3,3,0
+Profic Organic Ltd,3,3,0
+Nexgen Healthcare Pvt Ltd,3,3,0
+Sinsan Pharmaceuticals,3,3,0
+Acmedix Pharma LLP,3,3,0
+Vestal Healthcare,3,3,0
+Celon Laboratories Ltd,3,3,0
+Blaze Remedies,3,3,0
+Sharing Formulations Pvt Ltd,3,3,0
+Will Impex,3,3,0
+Gland Pharma Limited,3,3,0
+Laxian Healthcare,3,3,0
+Inex Medicaments Pvt Ltd,3,3,0
+Connote Healthcare,3,3,0
+LG Lifesciences,3,3,0
+Roche Products India Pvt Ltd,3,3,0
+Reliance Life Sciences,3,3,0
+Synmedic Laboratories,3,3,0
+Sanus Life Sciences,3,3,0
+Fresenius Kabi India Pvt Ltd,3,3,0
+MRHM Pharma Pvt Ltd,3,3,0
+Bennet Pharmaceuticals Limited,3,3,0
+Nouveau Medicament Pvt Ltd,3,3,0
+Ar-Ex Laboratories Pvt Ltd,3,3,0
+Salsim Pharma Pvt Ltd,3,3,0
+Elbrit Life Sciences,3,3,0
+Unimarck Healthcare Ltd,3,3,0
+Rencord Life Sciences Pvt Ltd,3,3,0
+Ankaa Pharmaceutical,3,3,0
+Paras Impex,0,1,-1
+Curagen Biological Pharmaceuticals,0,1,-1
+Syncom Formulations I Limited,0,1,-1
+Panbross Pharmaceuticals Pvt Ltd,0,1,-1
+Orn Remedies Pvt Ltd,0,2,-2
+MDC Pharmaceuticals Pvt Ltd,0,2,-2
+Parker Robinson Pvt Ltd,0,3,-3
+BestoChem Formulations India Ltd,0,3,-3
+Jawa Pharmaceuticals Pvt Ltd,0,8,-8
+Percos India Pvt Ltd,0,15,-15
+Talent India,0,49,-49
