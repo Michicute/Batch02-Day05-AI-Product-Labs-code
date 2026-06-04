@@ -553,6 +553,78 @@ def render_sources(sources: list[dict[str, object]]) -> None:
             st.json(source["metadata"])
 
 
+def browser_location_center(location: dict[str, object]) -> dict[str, object]:
+    return {
+        "label": "Vị trí hiện tại từ trình duyệt",
+        "lat": float(location["latitude"]),
+        "lon": float(location["longitude"]),
+    }
+
+
+def format_nearby_places_answer(
+    center: dict[str, object],
+    places: list[dict[str, object]],
+) -> str:
+    lines = [
+        f"Mình tìm được các cơ sở y tế gần bạn dựa trên: {center['label']}.",
+    ]
+    if not places:
+        lines.append("Hiện chưa tìm thấy cơ sở phù hợp trong bán kính mặc định.")
+        return "\n\n".join(lines)
+
+    for idx, place in enumerate(places[:5], start=1):
+        maps_url = (
+            "https://www.google.com/maps/dir/?api=1&destination="
+            f"{place['lat']},{place['lon']}"
+        )
+        address = place["address"] or "Chưa có địa chỉ chi tiết"
+        phone = f"\n   Số điện thoại: {place['phone']}" if place["phone"] else ""
+        lines.append(
+            f"{idx}. **{place['name']}** - {place['type']} - cách khoảng "
+            f"{place['distance_km']:.1f} km\n"
+            f"   Địa chỉ: {address}{phone}\n"
+            f"   [Mở đường đi trên Google Maps]({maps_url})"
+        )
+
+    lines.append(
+        "Nếu đây là tình huống khẩn cấp, hãy gọi cấp cứu địa phương hoặc đến cơ sở gần nhất ngay."
+    )
+    return "\n\n".join(lines)
+
+
+def answer_nearby_care_in_chat(
+    center: dict[str, object],
+    place_type: str = "Tất cả",
+) -> dict[str, object]:
+    places = find_nearby_places(
+        lat=center["lat"],
+        lon=center["lon"],
+        radius_m=5000,
+        place_type=place_type,
+    )
+    return {
+        "role": "assistant",
+        "content": format_nearby_places_answer(center, places),
+        "sources": [],
+    }
+
+
+def request_location_for_nearby_care(place_type: str) -> None:
+    st.session_state.pending_nearby_care = {"place_type": place_type}
+    st.session_state.messages.append(
+        {
+            "role": "assistant",
+            "content": (
+                "Mình cần quyền truy cập vị trí để tìm cơ sở y tế thật sự gần bạn. "
+                "Hãy bấm nút định vị bên dưới và chọn Cho phép."
+            ),
+            "sources": [],
+            "needs_location": True,
+        }
+    )
+    st.rerun()
+
+
 def is_nearby_care_request(text: str) -> bool:
     q = text.lower().strip()
     care_markers = [
@@ -619,24 +691,51 @@ def is_emergency_care_help_request(
     return asks_for_help and emergency_context
 
 
-def redirect_to_nearby_care(message: str) -> None:
-    st.session_state.messages.append(
-        {
-            "role": "assistant",
-            "content": message,
-            "sources": [],
-        }
-    )
-    st.session_state.active_view = "Cơ sở gần tôi"
-    st.rerun()
-
-
 def render_chat_history() -> None:
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.write(message["content"])
             if message["role"] == "assistant":
                 render_sources(message.get("sources", []))
+                if message.get("needs_location") and st.session_state.get(
+                    "pending_nearby_care"
+                ):
+                    render_location_permission_request()
+
+
+def render_location_permission_request() -> None:
+    location = streamlit_geolocation()
+    has_browser_location = (
+        isinstance(location, dict)
+        and location.get("latitude") is not None
+        and location.get("longitude") is not None
+    )
+    if not has_browser_location:
+        st.caption("Sau khi cấp quyền, danh sách cơ sở gần bạn sẽ xuất hiện ngay trong chat.")
+        return
+
+    pending = st.session_state.get("pending_nearby_care") or {}
+    place_type = pending.get("place_type", "Tất cả")
+    loading_slot = st.empty()
+    render_loading(loading_slot, "Đang tìm cơ sở y tế gần vị trí của bạn...")
+    try:
+        assistant_message = answer_nearby_care_in_chat(
+            center=browser_location_center(location),
+            place_type=place_type,
+        )
+    except Exception as exc:
+        loading_slot.empty()
+        st.error(f"Không thể tìm cơ sở gần bạn lúc này: {exc}")
+        st.stop()
+    loading_slot.empty()
+
+    st.session_state.pending_nearby_care = None
+    for message in reversed(st.session_state.messages):
+        if message.get("needs_location"):
+            message["needs_location"] = False
+            break
+    st.session_state.messages.append(assistant_message)
+    st.rerun()
 
 
 def render_chat(agent: RagAgent, top_k: int) -> None:
@@ -663,21 +762,12 @@ def render_chat(agent: RagAgent, top_k: int) -> None:
         st.write(question)
 
     if is_nearby_care_request(question):
-        redirect_to_nearby_care(
-            (
-                "Mình đã chuyển bạn sang phần gợi ý cơ sở y tế gần nhất. "
-                "Hãy bấm nút định vị và cho phép trình duyệt truy cập vị trí."
-            )
-        )
+        request_location_for_nearby_care("Tất cả")
+        return
 
     if is_emergency_care_help_request(question, st.session_state.messages[:-1]):
-        redirect_to_nearby_care(
-            (
-                "Mình sẽ giúp bạn tìm cơ sở y tế gần nhất. Nếu đây là tình huống "
-                "khẩn cấp, hãy gọi cấp cứu địa phương ngay. Bạn hãy bấm nút định vị "
-                "ở phần vừa mở để xem bệnh viện/phòng khám gần bạn."
-            )
-        )
+        request_location_for_nearby_care("Bệnh viện/phòng khám")
+        return
 
     loading_slot = st.empty()
     render_loading(loading_slot, "Đang tìm nguồn phù hợp và tạo câu trả lời...")
@@ -816,25 +906,14 @@ def main() -> None:
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    if "active_view" not in st.session_state:
-        st.session_state.active_view = "Hỏi đáp"
+    if "browser_location" not in st.session_state:
+        st.session_state.browser_location = None
+    if "pending_nearby_care" not in st.session_state:
+        st.session_state.pending_nearby_care = None
 
     agent = get_agent()
     top_k = render_sidebar()
-    view_options = ["Hỏi đáp", "Cơ sở gần tôi"]
-    selected_view = st.segmented_control(
-        "Khu vực",
-        view_options,
-        default=st.session_state.active_view,
-        label_visibility="collapsed",
-    )
-    if selected_view:
-        st.session_state.active_view = selected_view
-
-    if st.session_state.active_view == "Hỏi đáp":
-        render_chat(agent, top_k)
-    else:
-        render_nearby_care()
+    render_chat(agent, top_k)
 
 
 if __name__ == "__main__":
